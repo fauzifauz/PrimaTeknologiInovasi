@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRIMA TEKNOLOGI INOVASI | Innovating the Future</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- External Libraries -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        accent: {
+                            yellow: '#f59e0b',
+                            red: '#dc2626',
+                        }
+                    },
+                    fontFamily: {
+                        'sans': ['Poppins', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans text-gray-800 antialiased">
+
+    <!-- Navbar -->
+    <header id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm transition-all duration-300">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#home" class="text-2xl font-extrabold text-primary-700 tracking-tight flex items-center transition-transform duration-300 hover:scale-105">
+                <img src="assets/logo/logo_prima.png" 
+                    alt="PRIMA TEKNOLOGI INOVASI" 
+                    class="h-14 w-auto">
+            </a>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex space-x-8 text-sm font-medium">
+                <a href="#home" class="nav-link text-primary-700 hover:text-primary-600 transition-colors duration-300">Home</a>
+                <div class="relative group">
+                    <button class="nav-link flex items-center focus:outline-none hover:text-primary-600 transition-colors duration-300">About Us <i data-lucide="chevron-down" class="w-4 h-4 ml-1 transition-transform duration-300 group-hover:rotate-180"></i></button>
+                    <div class="dropdown-menu absolute left-0 mt-2 w-48 bg-white rounded-lg shadow-xl border border-gray-100 py-2 z-20 opacity-0 invisible transition-all duration-300 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transform -translate-y-2">
+                        <a href="#about-profile" class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-700 transition-colors">Company Profile</a>
+                        <a href="#brand-promise" class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-700 transition-colors">Brand Promise</a>
+                        <a href="#vision-mission" class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-700 transition-colors">Vision & Mission</a>
+                        <a href="#our-goals" class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-700 transition-colors">Our Goals</a>
+                    </div>
+                </div>
+                <div class="relative group">
+                    <button class="nav-link flex items-center focus:outline-none hover:text-primary-600 transition-colors duration-300">Services <i data-lucide="chevron-down" class="w-4 h-4 ml-1 transition-transform duration-300 group-hover:rotate-180"></i></button>
+                    <div class="dropdown-menu absolute left-0 mt-2 w-56 bg-white rounded-lg shadow-xl border border-gray-100 py-2 z-20 opacity-0 invisible transition-all duration-300 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transform -translate-y-2">
+                        <a href="#it-infrastructure" class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-700 transition-colors">IT Infrastructure</a>
+                        <a href="#iot-solutions" class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-700 transition-colors">IoT Solutions</a>
+                        <a href="#smart-building" class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-700 transition-colors">Smart Building & City</a>
+                        <a href="#managed-services" class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-700 transition-colors">Managed Services</a>
+                    </div>
+                </div>
+                <div class="relative group">
+                    <button class="nav-link flex items-center focus:outline-none hover:text-primary-600 transition-colors duration-300">Business & Capabilities <i data-lucide="chevron-down" class="w-4 h-4 ml-1 transition-transform duration-300 group-hover:rotate-180"></i></button>
+                    <div class="dropdown-menu absolute left-0 mt-2 w-64 bg-white rounded-lg shadow-xl border border-gray-100 py-2 z-20 opacity-0 invisible transition-all duration-300 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transform -translate-y-2">
+                        <a href="#company-overview" class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-700 transition-colors">Company Overview</a>
+                        <a href="#business-plan" class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-700 transition-colors">Business Plan</a>
+                        <a href="#marketing-strategy" class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-700 transition-colors">Marketing Strategy</a>
+                        <a href="#management-team" class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-700 transition-colors">Management Team</a>
+                        <a href="#certified-professionals" class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-700 transition-colors">Certified Professionals</a>
+                        <a href="#business-partners" class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-700 transition-colors">Business Partners</a>
+                    </div>
+                </div>
+                <a href="#contact" class="nav-link hover:text-primary-600 transition-colors duration-300">Contact</a>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100 transition">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden bg-white shadow-xl transition-all duration-300 max-h-0 overflow-hidden">
+            <nav class="flex flex-col p-4 space-y-2 text-sm font-medium">
+                <a href="#home" class="nav-link p-2 rounded-lg hover:bg-primary-50 hover:text-primary-700 transition-colors" onclick="closeMobileMenu()">Home</a>
+                
+                <div class="mobile-dropdown">
+                    <button class="mobile-dropdown-toggle nav-link p-2 rounded-lg w-full flex justify-between items-center hover:bg-primary-50 transition-colors">
+                        About Us
+                        <span>+</span>
+                    </button>
+                    <div class="mobile-dropdown-content pl-4 max-h-0 overflow-hidden transition-all duration-300">
+                        <a href="#about-profile" class="nav-link p-2 rounded-lg hover:bg-primary-50 hover:text-primary-700 transition-colors block" onclick="closeMobileMenu()">Company Profile</a>
+                        <a href="#brand-promise" class="nav-link p-2 rounded-lg hover:bg-primary-50 hover:text-primary-700 transition-colors block" onclick="closeMobileMenu()">Brand Promise</a>
+                        <a href="#vision-mission" class="nav-link p-2 rounded-lg hover:bg-primary-50 hover:text-primary-700 transition-colors block" onclick="closeMobileMenu()">Vision & Mission</a>
+                        <a href="#our-goals" class="nav-link p-2 rounded-lg hover:bg-primary-50 hover:text-primary-700 transition-colors block" onclick="closeMobileMenu()">Our Goals</a>
+                    </div>
+                </div>
+                
+                <div class="mobile-dropdown">
+                    <button class="mobile-dropdown-toggle nav-link p-2 rounded-lg w-full flex justify-between items-center hover:bg-primary-50 transition-colors">
+                        Services 
+                        <span>+</span>
+                    </button>
+                    <div class="mobile-dropdown-content pl-4 max-h-0 overflow-hidden transition-all duration-300">
+                        <a href="#it-infrastructure" class="nav-link p-2 rounded-lg hover:bg-primary-50 hover:text-primary-700 transition-colors block" onclick="closeMobileMenu()">IT Infrastructure</a>
+                        <a href="#iot-solutions" class="nav-link p-2 rounded-lg hover:bg-primary-50 hover:text-primary-700 transition-colors block" onclick="closeMobileMenu()">IoT Solutions</a>
+                        <a href="#smart-building" class="nav-link p-2 rounded-lg hover:bg-primary-50 hover:text-primary-700 transition-colors block" onclick="closeMobileMenu()">Smart Building & City</a>
+                        <a href="#managed-services" class="nav-link p-2 rounded-lg hover:bg-primary-50 hover:text-primary-700 transition-colors block" onclick="closeMobileMenu()">Managed Services</a>
+                    </div>
+                </div>
+                
+                <div class="mobile-dropdown">
+                    <button class="mobile-dropdown-toggle nav-link p-2 rounded-lg w-full flex justify-between items-center hover:bg-primary-50 transition-colors">
+                        Business & Capabilities 
+                        <span>+</span>
+                    </button>
+                    <div class="mobile-dropdown-content pl-4 max-h-0 overflow-hidden transition-all duration-300">
+                        <a href="#company-overview" class="nav-link p-2 rounded-lg hover:bg-primary-50 hover:text-primary-700 transition-colors block" onclick="closeMobileMenu()">Company Overview</a>
+                        <a href="#business-plan" class="nav-link p-2 rounded-lg hover:bg-primary-50 hover:text-primary-700 transition-colors block" onclick="closeMobileMenu()">Business Plan</a>
+                        <a href="#marketing-strategy" class="nav-link p-2 rounded-lg hover:bg-primary-50 hover:text-primary-700 transition-colors block" onclick="closeMobileMenu()">Marketing Strategy</a>
+                        <a href="#management-team" class="nav-link p-2 rounded-lg hover:bg-primary-50 hover:text-primary-700 transition-colors block" onclick="closeMobileMenu()">Management Team</a>
+                        <a href="#certified-professionals" class="nav-link p-2 rounded-lg hover:bg-primary-50 hover:text-primary-700 transition-colors block" onclick="closeMobileMenu()">Certified Professionals</a>
+                        <a href="#business-partners" class="nav-link p-2 rounded-lg hover:bg-primary-50 hover:text-primary-700 transition-colors block" onclick="closeMobileMenu()">Business Partners</a>
+                    </div>
+                </div>
+                
+                <a href="#contact" class="nav-link p-2 rounded-lg hover:bg-primary-50 hover:text-primary-700 transition-colors" onclick="closeMobileMenu()">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Home Section -->
+        <section id="home" class="relative pt-32 pb-16 lg:pt-40 lg:pb-20 z-10 hero-section bg-white overflow-hidden">
+            <!-- Background Image -->
+            <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" 
+                style="background-image: url('assets/background/backgroundhome.jpg')">
+                <!-- Overlay gradient untuk meningkatkan kontras dan elegan -->
+                <div class="absolute inset-0 bg-gradient-to-br from-primary-900/80 via-primary-800/70 to-primary-700/60"></div>
+            </div>
+
+            <!-- Particle Animation -->
+            <div class="particles-container absolute inset-0" id="particles"></div>
+
+            <!-- Circuit Lines -->
+            <div class="circuit-container absolute inset-0 overflow-hidden">
+                <div class="circuit-line" style="top: 20%; width: 30%; animation-delay: 0s;"></div>
+                <div class="circuit-line" style="top: 40%; width: 50%; animation-delay: 1s;"></div>
+                <div class="circuit-line" style="top: 60%; width: 40%; animation-delay: 2s;"></div>
+                <div class="circuit-line" style="top: 80%; width: 60%; animation-delay: 3s;"></div>
+            </div>
+
+            <!-- Data Nodes -->
+            <div class="nodes-container absolute inset-0">
+                <div class="data-node" style="top: 25%; left: 15%; animation-delay: 0s;"></div>
+                <div class="data-node" style="top: 35%; left: 35%; animation-delay: 0.5s;"></div>
+                <div class="data-node" style="top: 45%; left: 65%; animation-delay: 1s;"></div>
+                <div class="data-node" style="top: 55%; left: 25%; animation-delay: 1.5s;"></div>
+                <div class="data-node" style="top: 65%; left: 75%; animation-delay: 2s;"></div>
+                <div class="data-node" style="top: 75%; left: 45%; animation-delay: 2.5s;"></div>
+            </div>
+
+            <!-- Floating Tech Elements -->
+            <div class="floating-tech absolute inset-0 overflow-hidden">
+                <div class="absolute top-1/4 left-1/4 w-16 h-16 border border-white/40 rounded-lg transform rotate-45 floating-element" style="animation-delay: 0s;"></div>
+                <div class="absolute top-1/3 right-1/4 w-12 h-12 border border-accent-yellow/60 rounded-full floating-element" style="animation-delay: 1s;"></div>
+                <div class="absolute bottom-1/4 left-1/3 w-10 h-10 border border-white/40 transform rotate-12 floating-element" style="animation-delay: 2s;"></div>
+                <div class="absolute bottom-1/3 right-1/3 w-14 h-14 border border-white/40 rounded-lg floating-element" style="animation-delay: 1.5s;"></div>
+            </div>
+
+            <!-- Hero Content -->
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="max-w-4xl mx-auto text-center hero-content" data-aos="fade-up">
+                    <!-- Main Heading dengan gradient elegan -->
+                    <h1 class="text-4xl md:text-7xl font-extrabold leading-tight floating-element">
+                        <span class="bg-gradient-to-r from-white via-blue-50 to-accent-yellow bg-clip-text text-transparent">
+                            Innovating the Future
+                        </span>
+                    </h1>
+                    
+                    <!-- Subheading dengan warna putih bersih -->
+                    <p class="mt-4 text-xl md:text-3xl font-semibold text-white">
+                        Empowering Your Business Through Innovative Technology
+                    </p>
+                    
+                    <!-- Description dengan warna putih soft -->
+                    <p class="mt-6 text-base md:text-lg text-blue-50 max-w-2xl mx-auto leading-relaxed" data-aos="fade-up" data-aos-delay="100">
+                        PRIMA TEKNOLOGI INOVASI is your trusted partner in delivering innovative technologies that drive business transformation toward a digital future. We are dedicated to providing integrated IoT, IT infrastructure, and technology solutions that are effective and result-oriented, empowering your company to achieve a sustainable competitive advantage in the digital era.
+                    </p>
+                    
+                    <!-- CTA Button dengan kontras tinggi -->
+                    <div class="mt-8" data-aos="fade-up" data-aos-delay="200">
+                        <a href="#about" class="btn-animate inline-flex items-center justify-center px-8 py-4 md:px-10 md:py-4 text-lg md:text-xl font-semibold text-white bg-gradient-to-r from-accent-yellow to-orange-500 hover:from-orange-500 hover:to-accent-yellow rounded-full shadow-2xl transition-all duration-300 cta-animate transform hover:scale-105">
+                            Discover Our Solutions
+                            <i data-lucide="arrow-right" class="w-6 h-6 ml-3"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="py-12 bg-gradient-to-r from-primary-50 to-indigo-50">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+                    <div class="stat-card text-center" data-aos="fade-up" data-aos-delay="100">
+                        <div class="text-2xl md:text-3xl font-bold text-primary-700 mb-2">10+</div>
+                        <div class="text-xs md:text-sm text-gray-600">Projects Completed</div>
+                    </div>
+                    <div class="stat-card text-center" data-aos="fade-up" data-aos-delay="200">
+                        <div class="text-2xl md:text-3xl font-bold text-primary-700 mb-2">2+</div>
+                        <div class="text-xs md:text-sm text-gray-600">Years Experience</div>
+                    </div>
+                    <div class="stat-card text-center" data-aos="fade-up" data-aos-delay="300">
+                        <div class="text-2xl md:text-3xl font-bold text-primary-700 mb-2">8+</div>
+                        <div class="text-xs md:text-sm text-gray-600">Certified Professionals</div>
+                    </div>
+                    <div class="stat-card text-center" data-aos="fade-up" data-aos-delay="400">
+                        <div class="text-2xl md:text-3xl font-bold text-primary-700 mb-2">90%</div>
+                        <div class="text-xs md:text-sm text-gray-600">Client Satisfaction</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Us Section -->
+        <section id="about" class="py-20 lg:py-28 bg-white section-bg">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-primary-700 mb-12" data-aos="fade-down">About Us</h2>
+
+                <!-- Company Profile -->
+                <div class="max-w-4xl mx-auto text-center mb-16">
+                    <div id="about-profile" class="mb-6" data-aos="zoom-in">
+                        <div class="about-image-container">
+                            <img src="assets/aboutus.png" 
+                                alt="PRIMA TEKNOLOGI INOVASI" 
+                                class="mx-auto responsive-about-image">
+                        </div>
+                    </div>
+                    <p class="text-base md:text-lg text-gray-600" data-aos="fade-up">
+                        PRIMA TEKNOLOGI INOVASI believes that technology is the foundation of modern business growth. With a vision to empower organizations in the digital era, we deliver innovative, reliable, and integrated IoT, IT Infrastructure, and Technology Solutions tailored to each client's needs. Built on professionalism, integrity, and continuous innovation, we are your trusted partner in driving digital transformation and long-term success.
+                    </p>
+                </div>
+
+                <!-- Brand Promise -->
+                <div id="brand-promise" class="mb-20">
+                    <h3 class="text-2xl md:text-3xl font-bold text-center text-gray-700 mb-8" data-aos="fade-up">Brand Promise</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-5 gap-4 md:gap-6">
+                        <!-- P - Professionalism -->
+                        <div class="prime-box bg-white p-4 md:p-6 rounded-xl shadow-lg border-t-4 border-primary-700 text-center cursor-pointer" data-aos="zoom-in" data-aos-delay="100">
+                            <div class="text-3xl md:text-4xl font-extrabold text-primary-700 mb-3 floating-element">P</div>
+                            <h4 class="text-lg md:text-xl font-semibold text-gray-800 mb-2">Professionalism</h4>
+                            <p class="text-xs md:text-sm text-gray-500">Uphold strong work ethics and deliver exceptional service quality in every project.</p>
+                        </div>
+                        <!-- R - Reliability -->
+                        <div class="prime-box bg-white p-4 md:p-6 rounded-xl shadow-lg border-t-4 border-accent-yellow text-center cursor-pointer" data-aos="zoom-in" data-aos-delay="200">
+                            <div class="text-3xl md:text-4xl font-extrabold text-accent-yellow mb-3 floating-element">R</div>
+                            <h4 class="text-lg md:text-xl font-semibold text-gray-800 mb-2">Reliability</h4>
+                            <p class="text-xs md:text-sm text-gray-500">Consistency and trust are the foundation of our long-term client relationships.</p>
+                        </div>
+                        <!-- I - Innovation -->
+                        <div class="prime-box bg-white p-4 md:p-6 rounded-xl shadow-lg border-t-4 border-accent-red text-center cursor-pointer" data-aos="zoom-in" data-aos-delay="300">
+                            <div class="text-3xl md:text-4xl font-extrabold text-accent-red mb-3 floating-element">I</div>
+                            <h4 class="text-lg md:text-xl font-semibold text-gray-800 mb-2">Innovation</h4>
+                            <p class="text-xs md:text-sm text-gray-500">Transform ideas into powerful digital solutions that shape the future together.</p>
+                        </div>
+                        <!-- M - Modernization -->
+                        <div class="prime-box bg-white p-4 md:p-6 rounded-xl shadow-lg border-t-4 border-primary-700 text-center cursor-pointer" data-aos="zoom-in" data-aos-delay="400">
+                            <div class="text-3xl md:text-4xl font-extrabold text-primary-700 mb-3 floating-element">M</div>
+                            <h4 class="text-lg md:text-xl font-semibold text-gray-800 mb-2">Modernization</h4>
+                            <p class="text-xs md:text-sm text-gray-500">Stay ahead by embracing technology and continuous improvement.</p>
+                        </div>
+                        <!-- A - Agility -->
+                        <div class="prime-box bg-white p-4 md:p-6 rounded-xl shadow-lg border-t-4 border-accent-yellow text-center cursor-pointer" data-aos="zoom-in" data-aos-delay="500">
+                            <div class="text-3xl md:text-4xl font-extrabold text-accent-yellow mb-3 floating-element">A</div>
+                            <h4 class="text-lg md:text-xl font-semibold text-gray-800 mb-2">Agility</h4>
+                            <p class="text-xs md:text-sm text-gray-500">Adapt quickly to change and drive progress through flexible, effective solutions.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vision & Mission -->
+                <div id="vision-mission" class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 mb-20">
+                    <!-- Our Vision -->
+                    <div data-aos="fade-right">
+                        <h3 class="text-2xl md:text-3xl font-bold text-gray-700 mb-4 border-l-4 border-accent-red pl-3">Our Vision</h3>
+                        <p class="text-gray-600 italic mb-6">
+                            "To become a leading technology partner that drives sustainable business growth through innovation, integration, and digital transformation in IoT and IT Solutions."
+                        </p>
+                        <div class="space-y-4">
+                            <div class="p-4 md:p-5 bg-primary-50 rounded-lg shadow-sm flex items-start card-hover-effect">
+                                <span class="flex-shrink-0 text-lg md:text-xl font-bold text-accent-red mr-4 mt-1">1</span>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Building Digital Excellence</h4>
+                                    <p class="text-xs md:text-sm text-gray-600">We are committed to creating digital excellence that evolves with global innovation, helping businesses remain agile, competitive, and future-ready.</p>
+                                </div>
+                            </div>
+                            <div class="p-4 md:p-5 bg-primary-50 rounded-lg shadow-sm flex items-start card-hover-effect">
+                                <span class="flex-shrink-0 text-lg md:text-xl font-bold text-accent-red mr-4 mt-1">2</span>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Driving Integrated Tech Ecosystem Growth</h4>
+                                    <p class="text-xs md:text-sm text-gray-600">We strive to drive a connected and sustainable technology ecosystem that supports innovation and digital advancement across industries.</p>
+                                </div>
+                            </div>
+                            <div class="p-4 md:p-5 bg-primary-50 rounded-lg shadow-sm flex items-start card-hover-effect">
+                                <span class="flex-shrink-0 text-lg md:text-xl font-bold text-accent-red mr-4 mt-1">3</span>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Inspiring Digital Sustainability</h4>
+                                    <p class="text-xs md:text-sm text-gray-600">We encourage organizations to adopt smart, efficient, and sustainable digital transformation for long-term growth.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Our Mission -->
+                    <div data-aos="fade-left">
+                        <h3 class="text-2xl md:text-3xl font-bold text-gray-700 mb-4 border-l-4 border-accent-yellow pl-3">Our Mission</h3>
+                        <p class="text-gray-600 italic mb-6">
+                            "To deliver innovative, integrated, and value-driven technology solutions that help clients achieve efficiency, security, and sustainable growth for long-term success."
+                        </p>
+                        <div class="space-y-4">
+                            <div class="p-4 md:p-5 bg-primary-50 rounded-lg shadow-sm flex items-start card-hover-effect">
+                                <span class="flex-shrink-0 text-lg md:text-xl font-bold text-accent-red mr-4 mt-1">1</span>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Driving Digital Transformation</h4>
+                                    <p class="text-xs md:text-sm text-gray-600">We empower organizations to adopt digital innovation through tailored strategies that boost efficiency, productivity, and sustainable growth across all industries.</p>
+                                </div>
+                            </div>
+                            <div class="p-4 md:p-5 bg-primary-50 rounded-lg shadow-sm flex items-start card-hover-effect">
+                                <span class="flex-shrink-0 text-lg md:text-xl font-bold text-accent-red mr-4 mt-1">2</span>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Enhancing Capability</h4>
+                                    <p class="text-xs md:text-sm text-gray-600">We build a culture of learning and teamwork, enabling individuals and organizations to grow and achieve excellence together.</p>
+                                </div>
+                            </div>
+                            <div class="p-4 md:p-5 bg-primary-50 rounded-lg shadow-sm flex items-start card-hover-effect">
+                                <span class="flex-shrink-0 text-lg md:text-xl font-bold text-accent-red mr-4 mt-1">3</span>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Delivering Excellence</h4>
+                                    <p class="text-xs md:text-sm text-gray-600">We maintain global standards of quality and security, delivering trusted solutions through transparent and result-driven operations.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Our Goals -->
+                <div id="our-goals" class="text-center pt-10">
+                    <h3 class="text-2xl md:text-3xl font-bold text-gray-700 mb-10" data-aos="fade-up">Our Goals</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-5xl mx-auto">
+                        <div class="p-4 md:p-6 bg-white rounded-xl shadow-xl border-b-4 border-primary-700 card-hover-effect" data-aos="zoom-in" data-aos-delay="100">
+                            <i data-lucide="zap" class="w-6 md:w-8 h-6 md:h-8 text-accent-yellow mb-3 mx-auto floating-element"></i>
+                            <h4 class="text-lg md:text-xl font-semibold mb-2">Deliver High Impact Solutions</h4>
+                            <p class="text-xs md:text-sm text-gray-500">Provide innovative and result-oriented technology solutions that create measurable value for clients.</p>
+                        </div>
+                        <div class="p-4 md:p-6 bg-white rounded-xl shadow-xl border-b-4 border-primary-700 card-hover-effect" data-aos="zoom-in" data-aos-delay="200">
+                            <i data-lucide="handshake" class="w-6 md:w-8 h-6 md:h-8 text-accent-yellow mb-3 mx-auto floating-element"></i>
+                            <h4 class="text-lg md:text-xl font-semibold mb-2">Strengthen Meaningful Partnerships</h4>
+                            <p class="text-xs md:text-sm text-gray-500">Build sustainable, long-term collaborations based on trust, integrity, and mutual growth.</p>
+                        </div>
+                        <div class="p-4 md:p-6 bg-white rounded-xl shadow-xl border-b-4 border-primary-700 card-hover-effect" data-aos="zoom-in" data-aos-delay="300">
+                            <i data-lucide="repeat-2" class="w-6 md:w-8 h-6 md:h-8 text-accent-yellow mb-3 mx-auto floating-element"></i>
+                            <h4 class="text-lg md:text-xl font-semibold mb-2">Drive Digital Transformation</h4>
+                            <p class="text-xs md:text-sm text-gray-500">Support businesses in adapting to emerging technologies and achieving advantage in the digital era.</p>
+                        </div>
+                    </div>
+                    <div class="mt-8 md:mt-12" data-aos="fade-up">
+                        <a href="#services" class="inline-flex items-center text-base md:text-lg font-medium text-primary-700 hover:text-accent-red transition">
+                            Explore how our Product & Services can help your business grow smarter and faster.
+                            <i data-lucide="chevron-down" class="w-5 h-5 ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Divider -->
+        <div class="section-divider"></div>
+
+        <!-- Services Section -->
+        <section id="services" class="py-20 lg:py-28 bg-gray-50 section-bg">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-primary-700 mb-16" data-aos="fade-down">Services & Solutions</h2>
+
+                <!-- IT & IoT Introduction -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 mb-20">
+                    <div class="p-6 md:p-8 bg-primary-700 text-white rounded-xl shadow-2xl card-hover-effect" data-aos="fade-right">
+                        <h3 class="text-xl md:text-2xl font-bold mb-3 flex items-center">
+                            <i data-lucide="server" class="w-5 md:w-6 h-5 md:h-6 mr-2 text-accent-yellow floating-element"></i>
+                            IT Infrastructure & Solutions
+                        </h3>
+                        <p class="text-base md:text-lg font-light mb-4 italic">"The IT products we present are not just technology, but solutions that comprehensively address the business needs of customers."</p>
+                        <ul class="text-xs md:text-sm space-y-1">
+                            <li><i data-lucide="check-circle" class="w-4 h-4 inline mr-2 text-red-400"></i>Efficiency, security, reliability</li>
+                            <li><i data-lucide="check-circle" class="w-4 h-4 inline mr-2 text-red-400"></i>Flexibility, and long-term strategic value.</li>
+                        </ul>
+                    </div>
+                    <div class="p-6 md:p-8 bg-white text-gray-800 rounded-xl shadow-2xl border-t-4 border-accent-yellow card-hover-effect" data-aos="fade-left">
+                        <h3 class="text-xl md:text-2xl font-bold mb-3 flex items-center">
+                            <i data-lucide="globe" class="w-5 md:w-6 h-5 md:h-6 mr-2 text-primary-700 floating-element"></i>
+                            Internet of Things (IoT)
+                        </h3>
+                        <p class="text-base md:text-lg font-light mb-4 italic">"The Internet of Things (IoT) is not just devices that are interconnected, but a smart ecosystem that transforms data into real value for businesses."</p>
+                        <ul class="text-xs md:text-sm space-y-1">
+                            <li><i data-lucide="zap" class="w-4 h-4 inline mr-2 text-accent-red"></i>Real-time monitoring, predictive maintenance</li>
+                            <li><i data-lucide="zap" class="w-4 h-4 inline mr-2 text-accent-red"></i>Security, data-driven insight, competitive advantage.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- IT Infrastructure Products -->
+                <div id="it-infrastructure" class="mb-20">
+                    <h3 class="text-2xl md:text-3xl font-bold text-center text-gray-700 mb-10" data-aos="fade-up">Products & Solutions</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                        <!-- Server & Storage System -->
+                         <div class="p-4 md:p-6 bg-white rounded-xl shadow-lg border-b-4 border-accent-yellow card-hover-effect" data-aos="zoom-in" data-aos-delay="100">
+                            <i data-lucide="hard-drive" class="w-6 md:w-8 h-6 md:h-8 text-primary-700 mb-3 floating-element"></i>
+                            <h4 class="text-lg md:text-xl font-semibold mb-3">Server & Storage System</h4>
+                            <ul class="text-xs md:text-sm text-gray-600 space-y-2 list-disc list-inside">
+                                <li>Providing physical and virtual server solutions for data processing.</li>
+                                <li>Products include server racks, blade servers, and NAS/SAN storage systems.</li>
+                                <li>Ensure data availability, high performance, and storage security.</li>
+                            </ul>
+                        </div>
+                        <!-- Network Infrastructure -->
+                        <div class="p-4 md:p-6 bg-white rounded-xl shadow-lg border-b-4 border-accent-yellow card-hover-effect" data-aos="zoom-in" data-aos-delay="200">
+                            <i data-lucide="router" class="w-6 md:w-8 h-6 md:h-8 text-primary-700 mb-3 floating-element"></i>
+                            <h4 class="text-lg md:text-xl font-semibold mb-3">Network Infrastructure</h4>
+                            <ul class="text-xs md:text-sm text-gray-600 space-y-2 list-disc list-inside">
+                                <li>Building reliable & secure data communication networks.</li>
+                                <li>Products include switches, high-speed routers, firewalls, and access points.</li>
+                                <li>LAN and fiber optic installations with efficient topology management.</li>
+                            </ul>
+                        </div>
+                        <!-- Data Center Solution -->
+                        <div class="p-4 md:p-6 bg-white rounded-xl shadow-lg border-b-4 border-accent-yellow card-hover-effect" data-aos="zoom-in" data-aos-delay="300">
+                            <i data-lucide="power" class="w-6 md:w-8 h-6 md:h-8 text-primary-700 mb-3 floating-element"></i>
+                            <h4 class="text-lg md:text-xl font-semibold mb-3">Data Center Solution</h4>
+                            <ul class="text-xs md:text-sm text-gray-600 space-y-2 list-disc list-inside">
+                                <li>Complete solutions for building server rooms or data centers.</li>
+                                <li>Products include power systems, cooling, rack systems, UPS, and monitoring.</li>
+                                <li>Focus on energy efficiency, safety, and operational continuity.</li>
+                            </ul>
+                        </div>
+                        <!-- Enterprise Network Solution -->
+                        <div class="p-4 md:p-6 bg-white rounded-xl shadow-lg border-b-4 border-accent-yellow card-hover-effect" data-aos="zoom-in" data-aos-delay="400">
+                            <i data-lucide="network" class="w-6 md:w-8 h-6 md:h-8 text-primary-700 mb-3 floating-element"></i>
+                            <h4 class="text-lg md:text-xl font-semibold mb-3">Enterprise Network Solution</h4>
+                            <ul class="text-xs md:text-sm text-gray-600 space-y-2 list-disc list-inside">
+                                <li>SD-WAN benefits for improving network performance and cost efficiency.</li>
+                                <li>Comprehensive solutions including SD-WAN, enterprise-grade wireless, and NAC.</li>
+                                <li>Focus on enhancing operational efficiency and strengthening network security.</li>
+                            </ul>
+                        </div>
+                        <!-- Seat Management Solutions -->
+                        <div class="p-4 md:p-6 bg-white rounded-xl shadow-lg border-b-4 border-accent-yellow card-hover-effect" data-aos="zoom-in" data-aos-delay="500">
+                            <i data-lucide="monitor-dot" class="w-6 md:w-8 h-6 md:h-8 text-primary-700 mb-3 floating-element"></i>
+                            <h4 class="text-lg md:text-xl font-semibold mb-3">Seat Management Solutions</h4>
+                            <ul class="text-xs md:text-sm text-gray-600 space-y-2 list-disc list-inside">
+                                <li>Managing user devices (laptops, PCs, printers, etc.) from installation to maintenance.</li>
+                                <li>Proactive monitoring and maintenance for system reliability and performance.</li>
+                                <li>Ensuring seamless scalability and comprehensive network access security across systems.</li>
+                            </ul>
+                        </div>
+                        <!-- Software Licensing & Implementation -->
+                        <div class="p-4 md:p-6 bg-white rounded-xl shadow-lg border-b-4 border-accent-yellow card-hover-effect" data-aos="zoom-in" data-aos-delay="600">
+                            <i data-lucide="key" class="w-6 md:w-8 h-6 md:h-8 text-primary-700 mb-3 floating-element"></i>
+                            <h4 class="text-lg md:text-xl font-semibold mb-3">Software Solutions</h4>
+                            <ul class="text-xs md:text-sm text-gray-600 space-y-2 list-disc list-inside">
+                                <li>Helping organizations obtain official, compliant software licenses.</li>
+                                <li>Supporting leading global vendors (Microsoft, Adobe, Cisco, etc.).</li>
+                                <li>Structured implementation aligned with global industry best practices.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Smart Building & City Solutions -->
+                <div id="iot-solutions" class="smart-building-section">
+                    <div id="smart-building">
+                        <h3 class="text-2xl md:text-3xl font-bold text-center text-gray-700 mb-6" data-aos="fade-up">Smart Building & City Solutions</h3>
+                        <p class="text-center text-gray-600 max-w-3xl mx-auto mb-10 text-sm md:text-base" data-aos="fade-up" data-aos-delay="100">
+                            Realizing an intelligent, energy-efficient, and secure building environment through the integration of Internet of Things (IoT)-based systems.
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+                        <!-- Grid 6 Poin -->
+                        <div class="p-4 md:p-5 bg-white rounded-lg shadow-md border-l-4 border-accent-red card-hover-effect" data-aos="fade-up">
+                            <i data-lucide="lightbulb" class="w-5 md:w-6 h-5 md:h-6 text-accent-red mb-2 floating-element"></i>
+                            <h4 class="font-semibold text-gray-800 text-sm md:text-base">IoT System Integration</h4>
+                            <p class="text-xs md:text-sm text-gray-500">Integrating IoT systems to create smart, efficient, and secure buildings.</p>
+                        </div>
+                        <div class="p-4 md:p-5 bg-white rounded-lg shadow-md border-l-4 border-accent-red card-hover-effect" data-aos="fade-up" data-aos-delay="100">
+                            <i data-lucide="gauge" class="w-5 md:w-6 h-5 md:h-6 text-accent-red mb-2 floating-element"></i>
+                            <h4 class="font-semibold text-gray-800 text-sm md:text-base">Energy & Control Automation</h4>
+                            <p class="text-xs md:text-sm text-gray-500">Automating AC, lighting, and electrical systems for better energy efficiency.</p>
+                        </div>
+                        <div class="p-4 md:p-5 bg-white rounded-lg shadow-md border-l-4 border-accent-red card-hover-effect" data-aos="fade-up" data-aos-delay="200">
+                            <i data-lucide="flame" class="w-5 md:w-6 h-5 md:h-6 text-accent-red mb-2 floating-element"></i>
+                            <h4 class="font-semibold text-gray-800 text-sm md:text-base">Early Warning Systems</h4>
+                            <p class="text-xs md:text-sm text-gray-500">Detecting smoke, heat, and fire early with integrated alarms and sprinklers.</p>
+                        </div>
+                        <div class="p-4 md:p-5 bg-white rounded-lg shadow-md border-l-4 border-accent-red card-hover-effect" data-aos="fade-up" data-aos-delay="300">
+                            <i data-lucide="megaphone" class="w-5 md:w-6 h-5 md:h-6 text-accent-red mb-2 floating-element"></i>
+                            <h4 class="font-semibold text-gray-800 text-sm md:text-base">Automated Communication</h4>
+                            <p class="text-xs md:text-sm text-gray-500">Providing automated audio and announcements for effective communication.</p>
+                        </div>
+                        <div class="p-4 md:p-5 bg-white rounded-lg shadow-md border-l-4 border-accent-red card-hover-effect" data-aos="fade-up" data-aos-delay="400">
+                            <i data-lucide="cctv" class="w-5 md:w-6 h-5 md:h-6 text-accent-red mb-2 floating-element"></i>
+                            <h4 class="font-semibold text-gray-800 text-sm md:text-base">Advanced Security Monitoring</h4>
+                            <p class="text-xs md:text-sm text-gray-500">Enhancing building security with IP cameras, motion sensors, and real-time monitoring.</p>
+                        </div>
+                        <div class="p-4 md:p-5 bg-white rounded-lg shadow-md border-l-4 border-accent-red card-hover-effect" data-aos="fade-up" data-aos-delay="500">
+                            <i data-lucide="fingerprint" class="w-5 md:w-6 h-5 md:h-6 text-accent-red mb-2 floating-element"></i>
+                            <h4 class="font-semibold text-gray-800 text-sm md:text-base">Digital Access Management</h4>
+                            <p class="text-xs md:text-sm text-gray-500">Managing access with automated doors, smart ID cards, and digital visitor systems.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Managed Services -->
+               <div id="managed-services" class="managed-services-section">
+                    <h3 class="text-2xl md:text-3xl font-bold text-center text-gray-700 mb-6" data-aos="fade-up">Managed Services</h3>
+                        <p class="text-center text-gray-600 max-w-3xl mx-auto mb-10 text-sm md:text-base" data-aos="fade-up" data-aos-delay="100">
+                            Delivering end-to-end IT managed services designed to ensure system reliability, user productivity, and infrastructure efficiency.
+                        </p>
+                    <div class="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-6">
+                        <div class="text-center p-4 md:p-5 bg-primary-100 rounded-xl shadow-lg border-b-2 border-primary-700 card-hover-effect" data-aos="flip-up" data-aos-delay="100">
+                            <i data-lucide="laptop" class="w-6 md:w-8 h-6 md:h-8 text-primary-700 mx-auto mb-2 floating-element"></i>
+                            <h4 class="font-semibold text-xs md:text-sm">Device Management</h4>
+                        </div>
+                        <div class="text-center p-4 md:p-5 bg-primary-100 rounded-xl shadow-lg border-b-2 border-primary-700 card-hover-effect" data-aos="flip-up" data-aos-delay="200">
+                            <i data-lucide="headphones" class="w-6 md:w-8 h-6 md:h-8 text-primary-700 mx-auto mb-2 floating-element"></i>
+                            <h4 class="font-semibold text-xs md:text-sm">24/7 Technical Support</h4>
+                        </div>
+                        <div class="text-center p-4 md:p-5 bg-primary-100 rounded-xl shadow-lg border-b-2 border-primary-700 card-hover-effect" data-aos="flip-up" data-aos-delay="300">
+                            <i data-lucide="activity" class="w-6 md:w-8 h-6 md:h-8 text-primary-700 mx-auto mb-2 floating-element"></i>
+                            <h4 class="font-semibold text-xs md:text-sm">System Monitoring & Maint.</h4>
+                        </div>
+                        <div class="text-center p-4 md:p-5 bg-primary-100 rounded-xl shadow-lg border-b-2 border-primary-700 card-hover-effect" data-aos="flip-up" data-aos-delay="400">
+                            <i data-lucide="layers-3" class="w-6 md:w-8 h-6 md:h-8 text-primary-700 mx-auto mb-2 floating-element"></i>
+                            <h4 class="font-semibold text-xs md:text-sm">Asset & Config Management</h4>
+                        </div>
+                        <div class="text-center p-4 md:p-5 bg-primary-100 rounded-xl shadow-lg border-b-2 border-primary-700 card-hover-effect" data-aos="flip-up" data-aos-delay="500">
+                            <i data-lucide="user-check" class="w-6 md:w-8 h-6 md:h-8 text-primary-700 mx-auto mb-2 floating-element"></i>
+                            <h4 class="font-semibold text-xs md:text-sm">On-Site Technician Team</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Divider -->
+        <div class="section-divider"></div>
+
+        <!-- Business & Capabilities Section -->
+        <section id="business" class="py-20 lg:py-28 bg-white section-bg">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-primary-700 mb-16" data-aos="fade-down">Business & Capabilities</h2>
+
+                <!-- Company Overview -->
+                <div id="company-overview" class="max-w-4xl mx-auto text-center mb-16 p-6 md:p-8 border-b border-gray-200" data-aos="fade-up">
+                    <h3 class="text-2xl md:text-3xl font-semibold text-gray-700 mb-4">Company Overview</h3>
+                    <p class="text-base md:text-lg text-gray-600 mb-6">
+                        PRIMA TEKNOLOGI INOVASI is a forward-thinking technology company dedicated to delivering innovative and integrated IT solutions that empower businesses to thrive in the digital era. Driven by consistent growth in clients, projects, and market presence, we continuously expand our expertise across diverse industries. Backed by a professional team and strategic partnerships, we are committed to providing value-driven solutions, fostering long-term collaborations, and achieving sustainable business growth through technology excellence.
+                    </p>
+                    <a href="#business-plan" class="scroll-link inline-flex items-center text-sm md:text-base font-medium text-accent-red hover:text-primary-700 transition">
+                        Our View
+                        <i data-lucide="chevrons-down" class="w-4 h-4 ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- Business Plan & Marketing Strategy -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 mb-20">
+                    <!-- Business Plan -->
+                    <div id="business-plan" data-aos="fade-right">
+                        <h3 class="text-2xl md:text-3xl font-bold text-gray-700 mb-6 md:mb-8 border-l-4 border-accent-yellow pl-3">Business Plan</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                            <div class="p-4 md:p-6 bg-gray-50 rounded-xl shadow-md border-t-2 border-primary-700 card-hover-effect">
+                                <i data-lucide="trending-up" class="w-5 md:w-6 h-5 md:h-6 text-accent-red mb-2 floating-element"></i>
+                                <h4 class="font-semibold text-sm md:text-base">Product Innovation</h4>
+                                <p class="text-xs md:text-sm text-gray-500">Continuously invest in R&D to deliver innovative, integrated, and future-ready digital products.</p>
+                            </div>
+                            <div class="p-4 md:p-6 bg-gray-50 rounded-xl shadow-md border-t-2 border-primary-700 card-hover-effect">
+                                <i data-lucide="building" class="w-5 md:w-6 h-5 md:h-6 text-accent-red mb-2 floating-element"></i>
+                                <h4 class="font-semibold text-sm md:text-base">Digital Market Expansion</h4>
+                                <p class="text-xs md:text-sm text-gray-500">Expand services and reach new industries by offering customized and scalable technology solutions.</p>
+                            </div>
+                            <div class="p-4 md:p-6 bg-gray-50 rounded-xl shadow-md border-t-2 border-primary-700 card-hover-effect">
+                                <i data-lucide="link" class="w-5 md:w-6 h-5 md:h-6 text-accent-red mb-2 floating-element"></i>
+                                <h4 class="font-semibold text-sm md:text-base">Tech Strategic Partnerships</h4>
+                                <p class="text-xs md:text-sm text-gray-500">Build alliances with technology providers and business partners to enhance service capabilities.</p>
+                            </div>
+                            <div class="p-4 md:p-6 bg-gray-50 rounded-xl shadow-md border-t-2 border-primary-700 card-hover-effect">
+                                <i data-lucide="leaf" class="w-5 md:w-6 h-5 md:h-6 text-accent-red mb-2 floating-element"></i>
+                                <h4 class="font-semibold text-sm md:text-base">Sustainable Growth</h4>
+                                <p class="text-xs md:text-sm text-gray-500">Focus on long-term profitability by balancing performance with innovation and efficiency.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Marketing Strategy -->
+                    <div id="marketing-strategy" data-aos="fade-left">
+                        <h3 class="text-2xl md:text-3xl font-bold text-gray-700 mb-6 md:mb-8 border-l-4 border-accent-yellow pl-3">Marketing Strategy</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                            <div class="p-4 md:p-6 bg-gray-50 rounded-xl shadow-md border-t-2 border-primary-700 card-hover-effect">
+                                <i data-lucide="globe" class="w-5 md:w-6 h-5 md:h-6 text-accent-red mb-2 floating-element"></i>
+                                <h4 class="font-semibold text-sm md:text-base">Strategic Point</h4>
+                                <p class="text-xs md:text-sm text-gray-500">Positioning PRIMA T.I. as a reliable and innovative technology partner through value-driven solutions.</p>
+                            </div>
+                            <div class="p-4 md:p-6 bg-gray-50 rounded-xl shadow-md border-t-2 border-primary-700 card-hover-effect">
+                                <i data-lucide="megaphone" class="w-5 md:w-6 h-5 md:h-6 text-accent-red mb-2 floating-element"></i>
+                                <h4 class="font-semibold text-sm md:text-base">Brand Awareness</h4>
+                                <p class="text-xs md:text-sm text-gray-500">Enhancing visibility through digital marketing, social engagement, and strategic networking.</p>
+                            </div>
+                            <div class="p-4 md:p-6 bg-gray-50 rounded-xl shadow-md border-t-2 border-primary-700 card-hover-effect">
+                                <i data-lucide="user-check" class="w-5 md:w-6 h-5 md:h-6 text-accent-red mb-2 floating-element"></i>
+                                <h4 class="font-semibold text-sm md:text-base">Client-Centric Approach</h4>
+                                <p class="text-xs md:text-sm text-gray-500">Delivering tailored solutions with transparent communication and responsive support.</p>
+                            </div>
+                            <div class="p-4 md:p-6 bg-gray-50 rounded-xl shadow-md border-t-2 border-primary-700 card-hover-effect">
+                                <i data-lucide="handshake" class="w-5 md:w-6 h-5 md:h-6 text-accent-red mb-2 floating-element"></i>
+                                <h4 class="font-semibold text-sm md:text-base">Strategic Partnerships</h4>
+                                <p class="text-xs md:text-sm text-gray-500">Expanding market reach through alliances with industry leaders for comprehensive solutions.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Management Team -->
+                <div id="management-team" class="mb-20 text-center">
+                    <h3 class="text-2xl md:text-3xl font-bold text-gray-700 mb-10" data-aos="fade-up">Management Team</h3>
+                    <div class="team-layout max-w-4xl mx-auto">
+                        <!-- Tengah Atas: President Commissioner -->
+                        <div class="team-top" data-aos="zoom-in">
+                            <img src="assets/team/foto_commisioner.png" 
+                                alt="President Commissioner" 
+                                class="w-full max-w-xs md:max-w-sm mx-auto floating-element">
+                        </div>
+                        <!-- Kiri Bawah: Chief Executive Officer -->
+                        <div class="team-left" data-aos="zoom-in" data-aos-delay="200">
+                            <img src="assets/team/foto_ceo.png" 
+                                alt="Chief Executive Officer" 
+                                class="w-full max-w-xs md:max-w-sm mx-auto floating-element">
+                        </div>
+                        <!-- Kanan Bawah: Chief Technology Officer -->
+                        <div class="team-right" data-aos="zoom-in" data-aos-delay="400">
+                            <img src="assets/team/foto_cto.png" 
+                                alt="Chief Technology Officer" 
+                                class="w-full max-w-xs md:max-w-sm mx-auto floating-element">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certified Professionals -->
+                <div id="certified-professionals" class="mb-20">
+                    <h3 class="text-2xl md:text-3xl font-bold text-center text-gray-700 mb-8 md:mb-12" data-aos="fade-up">Certified Professionals</h3>
+                    <!-- Kumpulan Gambar Sertifikat -->
+                    <div class="cert-grid grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 px-2 md:px-4" data-aos="fade-up" data-aos-delay="100">
+                        <!-- Baris 1 -->
+                        <div class="flex justify-center" data-aos="flip-left" data-aos-delay="150">
+                            <img src="assets/certified/certif1.png" alt="PMP CERTIFIED" class="h-16 md:h-20 w-auto rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 cert-tag hover:scale-110 hover:-translate-y-2">
+                        </div>
+                        <div class="flex justify-center" data-aos="flip-left" data-aos-delay="200">
+                            <img src="assets/certified/certif2.png" alt="ARUBA AASX" class="h-16 md:h-20 w-auto rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 cert-tag hover:scale-110 hover:-translate-y-2">
+                        </div>
+                        <div class="flex justify-center" data-aos="flip-left" data-aos-delay="250">
+                            <img src="assets/certified/certif3.png" alt="ARUBA AASP" class="h-16 md:h-20 w-auto rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 cert-tag hover:scale-110 hover:-translate-y-2">
+                        </div>
+                        <div class="flex justify-center" data-aos="flip-left" data-aos-delay="300">
+                            <img src="assets/certified/certif4.png" alt="CCNP - CISCO" class="h-16 md:h-20 w-auto rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 cert-tag hover:scale-110 hover:-translate-y-2">
+                        </div>
+                        <!-- Baris 2 -->
+                        <div class="flex justify-center" data-aos="flip-right" data-aos-delay="350">
+                            <img src="assets/certified/certif5.png" alt="AHLI K3 UMUM" class="h-16 md:h-20 w-auto rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 cert-tag hover:scale-110 hover:-translate-y-2">
+                        </div>
+                        <div class="flex justify-center" data-aos="flip-right" data-aos-delay="400">
+                            <img src="assets/certified/certif6.png" alt="HCIA – DATACOM" class="h-16 md:h-20 w-auto rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 cert-tag hover:scale-110 hover:-translate-y-2">
+                        </div>
+                        <div class="flex justify-center" data-aos="flip-right" data-aos-delay="450">
+                            <img src="assets/certified/certif7.png" alt="CCDP - CISCO" class="h-16 md:h-20 w-auto rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 cert-tag hover:scale-110 hover:-translate-y-2">
+                        </div>
+                        <div class="flex justify-center" data-aos="flip-right" data-aos-delay="500">
+                            <img src="assets/certified/certif8.png" alt="CCNA - CISCO" class="h-16 md:h-20 w-auto rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 cert-tag hover:scale-110 hover:-translate-y-2">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Official Business Partners -->
+                <div id="business-partners">
+                <h3 class="text-2xl md:text-3xl font-bold text-center text-gray-700 mb-8 md:mb-10" data-aos="fade-up">Official Business Partners</h3>
+                    <div class="business-partners-container rounded-xl" data-aos="fade-up">
+                        <!-- Top Row - Logo 1-9 -->
+                        <div class="partners-row partners-row-top">
+                            <!-- Baris 1 - Logo 1 sampai 9 -->
+                            <div class="partner-item">
+                                <img src="assets/partner/partner1.png" class="partner-logo" alt="Partner Logo">
+                            </div>
+                            <div class="partner-item">
+                                <img src="assets/partner/partner2.png" class="partner-logo" alt="Partner Logo">
+                            </div>
+                            <div class="partner-item">
+                                <img src="assets/partner/partner3.png" class="partner-logo" alt="Partner Logo">
+                            </div>
+                            <div class="partner-item">
+                                <img src="assets/partner/partner4.png" class="partner-logo" alt="Partner Logo">
+                            </div>
+                            <div class="partner-item">
+                                <img src="assets/partner/partner5.png" class="partner-logo" alt="Partner Logo">
+                            </div>
+                            <div class="partner-item">
+                                <img src="assets/partner/partner6.png" class="partner-logo" alt="Partner Logo">
+                            </div>
+                            <div class="partner-item">
+                                <img src="assets/partner/partner7.png" class="partner-logo" alt="Partner Logo">
+                            </div>
+                            <div class="partner-item">
+                                <img src="assets/partner/partner8.png" class="partner-logo" alt="Partner Logo">
+                            </div>
+                            <div class="partner-item">
+                                <img src="assets/partner/partner9.png" class="partner-logo" alt="Partner Logo">
+                            </div>
+                            <!-- Duplicates for seamless loop -->
+                            <div class="partner-item">
+                                <img src="assets/partner/partner1.png" class="partner-logo" alt="Partner Logo">
+                            </div>
+                            <div class="partner-item">
+                                <img src="assets/partner/partner2.png" class="partner-logo" alt="Partner Logo">
+                            </div>
+                            <div class="partner-item">
+                                <img src="assets/partner/partner3.png" class="partner-logo" alt="Partner Logo">
+                            </div>
+                            <div class="partner-item">
+                                <img src="assets/partner/partner4.png" class="partner-logo" alt="Partner Logo">
+                            </div>
+                            <div class="partner-item">
+                                <img src="assets/partner/partner5.png" class="partner-logo" alt="Partner Logo">
+                            </div>
+                            <div class="partner-item">
+                                <img src="assets/partner/partner6.png" class="partner-logo" alt="Partner Logo">
+                            </div>
+                            <div class="partner-item">
+                                <img src="assets/partner/partner7.png" class="partner-logo" alt="Partner Logo">
+                            </div>
+                            <div class="partner-item">
+                                <img src="assets/partner/partner8.png" class="partner-logo" alt="Partner Logo">
+                            </div>
+                            <div class="partner-item">
+                                <img src="assets/partner/partner9.png" class="partner-logo" alt="Partner Logo">
+                            </div>
+                        </div>
+                                
+                        <!-- Bottom Row - Logo 10-18 -->
+                        <div class="partners-row partners-row-bottom">
+                            <!-- Baris 2 - Logo 10 sampai 18 -->
+                            <div class="partner-item">
+                                <img src="assets/partner/partner10.png" class="partner-logo" alt="Partner Logo">
+                            </div>
+                            <div class="partner-item">
+                                <img src="assets/partner/partner11.png" class="partner-logo" alt="Partner Logo">
+                            </div>
+                            <div class="partner-item">
+                                <img src="assets/partner/partner12.png" class="partner-logo" alt="Partner Logo">
+                            </div>
+                            <div class="partner-item">
+                                <img src="assets/partner/partner13.png" class="partner-logo" alt="Partner Logo">
+                            </div>
+                            <div class="partner-item">
+                                <img src="assets/partner/partner14.png" class="partner-logo" alt="Partner Logo">
+                            </div>
+                            <div class="partner-item">
+                                <img src="assets/partner/partner15.png" class="partner-logo" alt="Partner Logo">
+                            </div>
+                            <div class="partner-item">
+                                <img src="assets/partner/partner16.png" class="partner-logo" alt="Partner Logo">
+                            </div>
+                            <div class="partner-item">
+                                <img src="assets/partner/partner17.png" class="partner-logo" alt="Partner Logo">
+                            </div>
+                            <div class="partner-item">
+                                <img src="assets/partner/partner18.png" class="partner-logo" alt="Partner Logo">
+                            </div>
+                            <!-- Duplicates for seamless loop -->
+                            <div class="partner-item">
+                                <img src="assets/partner/partner10.png" class="partner-logo" alt="Partner Logo">
+                            </div>
+                            <div class="partner-item">
+                                <img src="assets/partner/partner11.png" class="partner-logo" alt="Partner Logo">
+                            </div>
+                            <div class="partner-item">
+                                <img src="assets/partner/partner12.png" class="partner-logo" alt="Partner Logo">
+                            </div>
+                            <div class="partner-item">
+                                <img src="assets/partner/partner13.png" class="partner-logo" alt="Partner Logo">
+                            </div>
+                            <div class="partner-item">
+                                <img src="assets/partner/partner14.png" class="partner-logo" alt="Partner Logo">
+                            </div>
+                            <div class="partner-item">
+                                <img src="assets/partner/partner15.png" class="partner-logo" alt="Partner Logo">
+                            </div>
+                            <div class="partner-item">
+                                <img src="assets/partner/partner16.png" class="partner-logo" alt="Partner Logo">
+                            </div>
+                            <div class="partner-item">
+                                <img src="assets/partner/partner17.png" class="partner-logo" alt="Partner Logo">
+                            </div>
+                            <div class="partner-item">
+                                <img src="assets/partner/partner18.png" class="partner-logo" alt="Partner Logo">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    </section>
+
+        <!-- Section Divider -->
+        <div class="section-divider"></div>
+
+        <!-- Testimonials Section -->
+        <section class="py-20 bg-gray-50">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-primary-700 mb-16" data-aos="fade-down">What Our Clients Say</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                    <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
+                        <p class="text-gray-600 mb-4">"PRIMA TEKNOLOGI INOVASI transformed our IT infrastructure with efficiency and professionalism. Their team delivered beyond our expectations."</p>
+                        <div class="flex items-center">
+                            <div class="w-10 md:w-12 h-10 md:h-12 bg-primary-700 rounded-full flex items-center justify-center overflow-hidden mr-3">
+                                <img src="assets/testimonial/testimonial1.jpeg" alt="John Doe" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">John Doe</h4>
+                                <p class="text-xs md:text-sm text-gray-500">CTO, Tech Solutions Inc.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+                        <p class="text-gray-600 mb-4">"The IoT solutions implemented by PRIMA have significantly improved our operational efficiency. Their expertise is truly remarkable for sure."</p>
+                        <div class="flex items-center">
+                            <div class="w-10 md:w-12 h-10 md:h-12 bg-primary-700 rounded-full flex items-center justify-center overflow-hidden mr-3">
+                                <img src="assets/testimonial/testimonial2.jpeg" alt="Anna Smith" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Anna Smith</h4>
+                                <p class="text-xs md:text-sm text-gray-500">Operations Director, Smart Industries</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
+                        <p class="text-gray-600 mb-4">"Working with PRIMA was a game-changer for our digital transformation journey. Their team is knowledgeable, responsive, and results-driven."</p>
+                        <div class="flex items-center">
+                            <div class="w-10 md:w-12 h-10 md:h-12 bg-primary-700 rounded-full flex items-center justify-center overflow-hidden mr-3">
+                                <img src="assets/testimonial/testimonial3.jpeg" alt="Michael Johnson" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Michael Johnson</h4>
+                                <p class="text-xs md:text-sm text-gray-500">CEO, FutureTech Enterprises</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Divider -->
+        <div class="section-divider"></div>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 lg:py-28 bg-gray-50 section-bg">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl md:text-5xl font-extrabold text-center text-accent-red mb-4" data-aos="fade-down">Let's Work Together</h2>
+                <p class="text-center text-base md:text-lg text-gray-600 mb-12 md:mb-16" data-aos="fade-up" data-aos-delay="100">
+                    We're ready to be your trusted partner in building smarter, connected solutions.
+                </p>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
+                    <!-- Contact Info & Map -->
+                    <div data-aos="fade-right">
+                        <div class="space-y-4 md:space-y-6 mb-8 md:mb-10">
+                            <div class="flex items-center text-base md:text-lg">
+                                <i data-lucide="phone" class="w-5 md:w-6 h-5 md:h-6 text-primary-700 mr-3 md:mr-4 floating-element"></i>
+                                <span class="font-medium">0812-8186-2426</span>
+                            </div>
+                            <div class="flex items-center text-base md:text-lg">
+                                <i data-lucide="mail" class="w-5 md:w-6 h-5 md:h-6 text-primary-700 mr-3 md:mr-4 floating-element"></i>
+                                <span class="font-medium">bidding@primatekno.co.id</span>
+                            </div>
+                            <div class="flex items-center text-base md:text-lg">
+                                <i data-lucide="globe" class="w-5 md:w-6 h-5 md:h-6 text-primary-700 mr-3 md:mr-4 floating-element"></i>
+                                <span class="font-medium">www.primatekno.co.id</span>
+                            </div>
+                            <div class="flex items-start text-base md:text-lg pt-2 md:pt-4">
+                                <i data-lucide="map-pin" class="w-5 md:w-6 h-5 md:h-6 text-accent-red mr-3 md:mr-4 mt-1 floating-element"></i>
+                                <span class="font-medium">Daerah Khusus Ibu Kota Jakarta</span>
+                            </div>
+                        </div>
+
+                        <!-- Enhanced Interactive Map -->
+                        <div class="mb-6">
+                            <h3 class="text-lg md:text-xl font-bold text-gray-700 mb-4">Our Location</h3>
+                            <div class="map-container relative" id="map">
+                                <!-- Map will be initialized here -->
+                            </div>
+                            <div class="location-info">
+                                <h4 class="font-semibold text-gray-800 mb-2">PRIMA TEKNOLOGI INOVASI</h4>
+                                <p class="text-xs md:text-sm text-gray-600">Jakarta, Indonesia</p>
+                                <div class="mt-3 flex flex-col md:flex-row gap-2 md:gap-3">
+                                    <a href="https://maps.google.com/?q=Jakarta,Indonesia" target="_blank" 
+                                       class="inline-flex items-center text-xs md:text-sm text-primary-600 hover:text-primary-800 transition">
+                                        <i data-lucide="navigation" class="w-4 h-4 mr-1"></i>
+                                        Open in Google Maps
+                                    </a>
+                                    <a href="https://www.google.com/maps/dir//Jakarta,Indonesia" target="_blank" 
+                                       class="inline-flex items-center text-xs md:text-sm text-green-600 hover:text-green-800 transition">
+                                        <i data-lucide="route" class="w-4 h-4 mr-1"></i>
+                                        Get Directions
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+        <!-- Contact Form -->
+        <div data-aos="fade-left">
+            <form id="contact-form" class="contact-form-container p-6 md:p-8 bg-white rounded-xl shadow-2xl space-y-4 md:space-y-6">
+                <h3 class="text-xl md:text-2xl font-bold text-gray-700 mb-4 md:mb-6">Send Us a Message</h3>
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                    <input type="text" id="name" class="form-input w-full p-3 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 transition" placeholder="John Doe">
+                </div>
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Active Email</label>
+                    <input type="email" id="email" class="form-input w-full p-3 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 transition" placeholder="email@company.com">
+                </div>
+                <div>
+                    <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message / Business Inquiry</label>
+                    <textarea id="message" rows="4" class="form-input w-full p-3 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 transition" placeholder="I’m interested in your Managed Services solutions…"></textarea>
+                </div>
+                <button type="submit" class="btn-animate w-full py-3 text-base md:text-lg font-semibold text-white bg-primary-700 rounded-full shadow-lg hover:bg-primary-800 transition duration-300 transform hover:scale-[1.01]">
+                    Send Message
+                    <i data-lucide="send" class="w-5 h-5 ml-2 inline-block"></i>
+                </button>
+                <p id="form-message" class="text-center text-xs md:text-sm text-gray-500 pt-3 hidden"></p>
+            </form>
+
+            <!-- Simple Additional Info -->
+            <div class="mt-6 md:mt-8 p-4 md:p-6 bg-primary-50 rounded-xl border border-primary-100">
+                <div class="flex items-start space-x-3 md:space-x-4">
+                    <div class="flex-shrink-0 w-8 md:w-10 h-8 md:h-10 bg-primary-100 rounded-full flex items-center justify-center">
+                        <i data-lucide="clock" class="w-4 md:w-5 h-4 md:h-5 text-primary-700"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-primary-800 text-xs md:text-sm mb-1">Fast Response</h4>
+                        <p class="text-xs text-primary-600">We will respond to your message within 1–2 business hours.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Alternative Contact -->
+            <div class="mt-4 text-center">
+                <p class="text-xs md:text-sm text-gray-600 mb-3">Or contact us directly:</p>
+                <div class="flex flex-col md:flex-row justify-center items-center space-y-2 md:space-y-0 md:space-x-6">
+                    <a href="https://wa.me/6281281862426" target="_blank" class="inline-flex items-center text-xs md:text-sm text-green-600 hover:text-green-800 transition">
+                        <i data-lucide="message-circle" class="w-4 h-4 mr-1"></i>
+                        WhatsApp
+                    </a>
+                    <a href="tel:081281862426" class="inline-flex items-center text-xs md:text-sm text-primary-600 hover:text-primary-800 transition">
+                        <i data-lucide="phone" class="w-4 h-4 mr-1"></i>
+                        Telepon
+                    </a>
+                    <a href="mailto:bidding@primatekno.co.id" class="inline-flex items-center text-xs md:text-sm text-accent-red hover:text-accent-red transition">
+                        <i data-lucide="mail" class="w-4 h-4 mr-1"></i>
+                        Email
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-10">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8">
+                <div>
+                    <h3 class="text-lg md:text-xl font-bold mb-4">PRIMA TEKNOLOGI INOVASI</h3>
+                    <p class="text-gray-400 text-sm">Innovating the future through cutting-edge technology solutions.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#home" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition">About Us</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition">Services</a></li>
+                        <li><a href="#business" class="text-gray-400 hover:text-white transition">Business & Capabilities</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Services</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#it-infrastructure" class="text-gray-400 hover:text-white transition">IT Infrastructure</a></li>
+                        <li><a href="#iot-solutions" class="text-gray-400 hover:text-white transition">IoT Solutions</a></li>
+                        <li><a href="#smart-building" class="text-gray-400 hover:text-white transition">Smart Building</a></li>
+                        <li><a href="#managed-services" class="text-gray-400 hover:text-white transition">Managed Services</a></li>
+                    </ul>
+                </div>
+                <div>
+                   <h4 class="font-semibold mb-4">Connect With Us</h4>
+                    <div class="flex space-x-4 mb-4">
+                        <a href="https://wa.me/6281281862426" target="_blank" class="text-gray-400 hover:text-green-500 transition" title="WhatsApp">
+                            <i data-lucide="message-circle" class="w-5 h-5"></i>
+                        </a>
+                        <a href="https://instagram.com/primatekno" target="_blank" class="text-gray-400 hover:text-pink-500 transition" title="Instagram">
+                            <i data-lucide="instagram" class="w-5 h-5"></i>
+                        </a>
+                        <a href="mailto:bidding@primatekno.co.id" class="text-gray-400 hover:text-red-400 transition" title="Email">
+                            <i data-lucide="mail" class="w-5 h-5"></i>
+                        </a>
+                        <a href="https://linkedin.com/company/prima-teknologi-inovasi" target="_blank" class="text-gray-400 hover:text-blue-400 transition" title="LinkedIn">
+                            <i data-lucide="linkedin" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                    <p class="text-xs md:text-sm text-gray-400">
+                        &copy; <span id="current-year"></span> PRIMA TEKNOLOGI INOVASI. All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- External Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <!-- Custom Script -->
+    <script src="js/script.js"></script>
+</body>
+</html>
