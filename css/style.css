@@ -1003,15 +1003,6 @@ select.form-input {
     align-items: center;
 }
 
-.mobile-dropdown-toggle::after {
-    content: '+';
-    transition: transform 0.3s ease;
-}
-
-.mobile-dropdown-toggle.active::after {
-    content: '-';
-}
-
 /* FIXED: Mobile menu styling */
 #mobile-menu {
     max-height: 0;
@@ -1371,4 +1362,123 @@ select.form-input {
         transparent 70%
     );
     z-index: -1;
+}
+
+/* Logo Splash Screen Animations */
+#logo-splash {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
+}
+
+#logo-splash.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.logo-splash-image {
+    width: 200px;
+    height: auto;
+    animation: logoPulse 2s ease-in-out infinite, logoZoom 1.5s ease-out forwards;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1));
+}
+
+@keyframes logoPulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.9;
+    }
+}
+
+@keyframes logoZoom {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes loading {
+    0% {
+        transform: translateX(-100%);
+    }
+    50% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.animate-loading {
+    animation: loading 2s ease-in-out infinite;
+}
+
+/* Enhanced loading animation */
+.logo-animation-container {
+    position: relative;
+}
+
+.logo-animation-container::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: ripple 3s ease-out infinite;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0.8);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* Smooth page transition */
+body {
+    opacity: 0;
+    animation: pageFadeIn 0.5s ease-out 0.5s forwards;
+}
+
+@keyframes pageFadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Mobile responsive adjustments for splash screen */
+@media (max-width: 768px) {
+    .logo-splash-image {
+        width: 150px;
+    }
+    
+    .loading-bar-container {
+        width: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo-splash-image {
+        width: 120px;
+    }
+    
+    .loading-bar-container {
+        width: 180px;
+    }
 }

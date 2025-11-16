@@ -42,6 +42,8 @@
                         'float': 'float 6s ease-in-out infinite',
                         'fade-in': 'fadeIn 0.5s ease-in-out',
                         'slide-up': 'slideUp 0.5s ease-out',
+                        'logo-pulse': 'logoPulse 2s ease-in-out infinite',
+                        'logo-zoom': 'logoZoom 1.5s ease-out forwards',
                     }
                 }
             }
@@ -49,6 +51,18 @@
     </script>
 </head>
 <body class="font-sans text-gray-800 antialiased">
+
+    <!-- Logo Animation Splash Screen -->
+    <div id="logo-splash" class="fixed inset-0 bg-white z-[9999] flex items-center justify-center transition-all duration-1000">
+        <div class="logo-animation-container text-center">
+            <img src="assets/logo/logo_prima.png" 
+                 alt="PRIMA TEKNOLOGI INOVASI" 
+                 class="logo-splash-image mx-auto mb-8 animate-logo-pulse">
+            <div class="loading-bar-container w-48 h-1 bg-gray-200 rounded-full mx-auto overflow-hidden">
+                <div class="loading-bar h-full bg-gradient-to-r from-primary-600 to-accent-yellow rounded-full animate-loading"></div>
+            </div>
+        </div>
+    </div>
 
     <!-- Navbar -->
     <header id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm transition-all duration-300">

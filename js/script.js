@@ -1,3 +1,207 @@
+// Logo Splash Screen Animation
+function initializeLogoSplash() {
+    const logoSplash = document.getElementById('logo-splash');
+    
+    if (!logoSplash) return;
+    
+    // Minimum display time for splash screen (2 seconds)
+    const minDisplayTime = 2000;
+    const startTime = Date.now();
+    
+    function hideSplash() {
+        const elapsedTime = Date.now() - startTime;
+        const remainingTime = Math.max(0, minDisplayTime - elapsedTime);
+        
+        setTimeout(() => {
+            logoSplash.classList.add('hidden');
+            
+            // Remove from DOM after animation completes
+            setTimeout(() => {
+                if (logoSplash.parentNode) {
+                    logoSplash.parentNode.removeChild(logoSplash);
+                }
+            }, 1000);
+            
+        }, remainingTime);
+    }
+    
+    // Hide splash when page is fully loaded
+    if (document.readyState === 'complete') {
+        hideSplash();
+    } else {
+        window.addEventListener('load', hideSplash);
+    }
+    
+    // Alternative: hide on user interaction (click/tap)
+    logoSplash.addEventListener('click', hideSplash);
+    
+    // Safety timeout - always hide after 5 seconds max
+    setTimeout(hideSplash, 5000);
+}
+
+// Enhanced initialization function
+function initializeWebsite() {
+    // Initialize logo splash first
+    initializeLogoSplash();
+    
+    // Then initialize everything else with a slight delay
+    setTimeout(() => {
+        // Initialize AOS
+        if (window.AOS) {
+            AOS.init({ 
+                duration: 900, 
+                once: true, 
+                easing: 'ease-in-out',
+                offset: 100
+            });
+        }
+
+        // Initialize lucide icons
+        try { 
+            if (window.lucide) {
+                lucide.createIcons();
+                // Refresh icons after dynamic content
+                setTimeout(() => lucide.createIcons(), 1000);
+            }
+        } catch (err) { 
+            console.warn('Lucide icons not available:', err);
+        }
+
+        // Set current year in footer
+        const yearEl = document.getElementById('current-year');
+        if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+        // Enhanced smooth scrolling
+        enhancedSmoothScroll();
+
+        // Header shadow toggle on scroll
+        const header = document.getElementById('navbar');
+        const onScroll = () => {
+            if (!header) return;
+            if (window.scrollY > 20) header.classList.add('scrolled');
+            else header.classList.remove('scrolled');
+        };
+        onScroll();
+        window.addEventListener('scroll', onScroll, { passive: true });
+
+        // Hero parallax effect
+        const hero = document.querySelector('.hero-section');
+        const heroContent = document.querySelector('.hero-content');
+        if (hero && heroContent && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+            hero.addEventListener('mousemove', (e) => {
+                const rect = hero.getBoundingClientRect();
+                const px = (e.clientX - rect.left) / rect.width - 0.5;
+                const py = (e.clientY - rect.top) / rect.height - 0.5;
+                const tx = px * 15;
+                const ty = py * 10;
+                heroContent.style.transform = `translate3d(${tx}px, ${-ty}px, 0) scale(1)`;
+            });
+            hero.addEventListener('mouseleave', () => { 
+                heroContent.style.transform = '';
+            });
+        }
+
+        // Pause logo carousel on hover
+        const logoCarousel = document.querySelector('.logo-carousel');
+        if (logoCarousel) {
+            logoCarousel.addEventListener('mouseenter', () => { 
+                logoCarousel.style.animationPlayState = 'paused'; 
+            });
+            logoCarousel.addEventListener('mouseleave', () => { 
+                logoCarousel.style.animationPlayState = 'running'; 
+            });
+        }
+
+        // Contact Form Submission
+        const contactForm = document.getElementById('contact-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const name = document.getElementById('name').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const message = document.getElementById('message').value.trim();
+                const msgEl = document.getElementById('form-message');
+
+                // Basic validation
+                if (!name || !email || !message) {
+                    if (msgEl) {
+                        msgEl.classList.remove('hidden');
+                        msgEl.classList.remove('text-green-600');
+                        msgEl.classList.add('text-red-600');
+                        msgEl.textContent = 'Please complete all required fields.';
+                    }
+                    return;
+                }
+
+                // Email validation
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    if (msgEl) {
+                        msgEl.classList.remove('hidden');
+                        msgEl.classList.remove('text-green-600');
+                        msgEl.classList.add('text-red-600');
+                        msgEl.textContent = 'Please enter a valid email address.';
+                    }
+                    return;
+                }
+
+                // Simulate form submission
+                if (msgEl) {
+                    msgEl.classList.remove('hidden');
+                    msgEl.classList.remove('text-red-600');
+                    msgEl.classList.add('text-green-600');
+                    msgEl.textContent = 'Thank you for your message! We will get back to you soon.';
+                }
+
+                // Clear form after successful submission simulation
+                setTimeout(() => {
+                    e.target.reset();
+                    if (msgEl) {
+                        msgEl.classList.add('hidden');
+                    }
+                }, 3000);
+            });
+        }
+
+        // Initialize particle animation
+        createParticles();
+        
+        // Optimize background image loading
+        optimizeBackgroundImage();
+        
+        // Lazy load images
+        lazyLoadImages();
+        
+        // Add scroll progress indicator
+        addScrollProgress();
+        
+        // Initialize map when page loads
+        setTimeout(() => {
+            if (document.getElementById('map')) {
+                try {
+                    initMap();
+                } catch (error) {
+                    console.warn('Map initialization failed:', error);
+                }
+            }
+        }, 500);
+
+        // Add loading state management
+        window.addEventListener('load', () => {
+            document.body.classList.add('loaded');
+        });
+
+        // Performance monitoring
+        if ('performance' in window) {
+            window.addEventListener('load', () => {
+                const perfData = window.performance.timing;
+                const loadTime = perfData.loadEventEnd - perfData.navigationStart;
+                console.log(`Page loaded in ${loadTime}ms`);
+            });
+        }
+    }, 100);
+}
+
 // FIXED: Mobile dropdown functionality
 document.addEventListener('DOMContentLoaded', function() {
     // Mobile menu toggle
@@ -306,163 +510,6 @@ function addScrollProgress() {
         
         progressBar.style.width = `${scrollPercent}%`;
     });
-}
-
-// Main initialization function
-function initializeWebsite() {
-    // Initialize AOS
-    if (window.AOS) {
-        AOS.init({ 
-            duration: 900, 
-            once: true, 
-            easing: 'ease-in-out',
-            offset: 100
-        });
-    }
-
-    // Initialize lucide icons
-    try { 
-        if (window.lucide) {
-            lucide.createIcons();
-            // Refresh icons after dynamic content
-            setTimeout(() => lucide.createIcons(), 1000);
-        }
-    } catch (err) { 
-        console.warn('Lucide icons not available:', err);
-    }
-
-    // Set current year in footer
-    const yearEl = document.getElementById('current-year');
-    if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-    // Enhanced smooth scrolling
-    enhancedSmoothScroll();
-
-    // Header shadow toggle on scroll
-    const header = document.getElementById('navbar');
-    const onScroll = () => {
-        if (!header) return;
-        if (window.scrollY > 20) header.classList.add('scrolled');
-        else header.classList.remove('scrolled');
-    };
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-
-    // Hero parallax effect
-    const hero = document.querySelector('.hero-section');
-    const heroContent = document.querySelector('.hero-content');
-    if (hero && heroContent && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-        hero.addEventListener('mousemove', (e) => {
-            const rect = hero.getBoundingClientRect();
-            const px = (e.clientX - rect.left) / rect.width - 0.5;
-            const py = (e.clientY - rect.top) / rect.height - 0.5;
-            const tx = px * 15;
-            const ty = py * 10;
-            heroContent.style.transform = `translate3d(${tx}px, ${-ty}px, 0) scale(1)`;
-        });
-        hero.addEventListener('mouseleave', () => { 
-            heroContent.style.transform = '';
-        });
-    }
-
-    // Pause logo carousel on hover
-    const logoCarousel = document.querySelector('.logo-carousel');
-    if (logoCarousel) {
-        logoCarousel.addEventListener('mouseenter', () => { 
-            logoCarousel.style.animationPlayState = 'paused'; 
-        });
-        logoCarousel.addEventListener('mouseleave', () => { 
-            logoCarousel.style.animationPlayState = 'running'; 
-        });
-    }
-
-    // Contact Form Submission
-    const contactForm = document.getElementById('contact-form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const name = document.getElementById('name').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const message = document.getElementById('message').value.trim();
-            const msgEl = document.getElementById('form-message');
-
-            // Basic validation
-            if (!name || !email || !message) {
-                if (msgEl) {
-                    msgEl.classList.remove('hidden');
-                    msgEl.classList.remove('text-green-600');
-                    msgEl.classList.add('text-red-600');
-                    msgEl.textContent = 'Please complete all required fields.';
-                }
-                return;
-            }
-
-            // Email validation
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                if (msgEl) {
-                    msgEl.classList.remove('hidden');
-                    msgEl.classList.remove('text-green-600');
-                    msgEl.classList.add('text-red-600');
-                    msgEl.textContent = 'Please enter a valid email address.';
-                }
-                return;
-            }
-
-            // Simulate form submission
-            if (msgEl) {
-                msgEl.classList.remove('hidden');
-                msgEl.classList.remove('text-red-600');
-                msgEl.classList.add('text-green-600');
-                msgEl.textContent = 'Thank you for your message! We will get back to you soon.';
-            }
-
-            // Clear form after successful submission simulation
-            setTimeout(() => {
-                e.target.reset();
-                if (msgEl) {
-                    msgEl.classList.add('hidden');
-                }
-            }, 3000);
-        });
-    }
-
-    // Initialize particle animation
-    createParticles();
-    
-    // Optimize background image loading
-    optimizeBackgroundImage();
-    
-    // Lazy load images
-    lazyLoadImages();
-    
-    // Add scroll progress indicator
-    addScrollProgress();
-    
-    // Initialize map when page loads
-    setTimeout(() => {
-        if (document.getElementById('map')) {
-            try {
-                initMap();
-            } catch (error) {
-                console.warn('Map initialization failed:', error);
-            }
-        }
-    }, 500);
-
-    // Add loading state management
-    window.addEventListener('load', () => {
-        document.body.classList.add('loaded');
-    });
-
-    // Performance monitoring
-    if ('performance' in window) {
-        window.addEventListener('load', () => {
-            const perfData = window.performance.timing;
-            const loadTime = perfData.loadEventEnd - perfData.navigationStart;
-            console.log(`Page loaded in ${loadTime}ms`);
-        });
-    }
 }
 
 // Error handling for images
