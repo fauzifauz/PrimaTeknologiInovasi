@@ -2862,7 +2862,6 @@ section[id] {
     pointer-events: none;
 }
 
-/* Mobile Responsive Fixes for Hero Section */
 @media (max-width: 480px) {
     .hero-section {
         padding-top: 6rem !important;
@@ -2921,7 +2920,6 @@ section[id] {
     }
 }
 
-/* Enhanced responsive text sizing */
 .hero-title {
     background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 45%, #fef3c7 100%);
     -webkit-background-clip: text;
@@ -2933,7 +2931,6 @@ section[id] {
     max-width: 100%;
 }
 
-/* Ensure proper spacing on all devices */
 .hero-section .container {
     padding-left: 1rem;
     padding-right: 1rem;
@@ -2943,7 +2940,6 @@ section[id] {
     width: 100%;
 }
 
-/* Fix for very small screens */
 @media (max-width: 280px) {
     .hero-title {
         font-size: 1.75rem !important;
@@ -2955,7 +2951,6 @@ section[id] {
     }
 }
 
-/* Prevent horizontal scrolling */
 .hero-section {
     overflow-x: hidden;
 }
