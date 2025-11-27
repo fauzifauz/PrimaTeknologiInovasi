@@ -282,6 +282,76 @@ function initializeMobileDropdown() {
     };
 }
 
+function initializeContactForm() {
+    const contactForm = document.getElementById('contact-form');
+    if (!contactForm) return;
+
+    contactForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const submitButton = this.querySelector('button[type="submit"]');
+        const originalText = submitButton.innerHTML;
+        const formMessage = document.getElementById('form-message');
+        
+        // Show loading state
+        submitButton.innerHTML = 'Sending...';
+        submitButton.disabled = true;
+        
+        // Get form data
+        const formData = new FormData(this);
+        const data = {
+            name: document.getElementById('name').value.trim(),
+            email: document.getElementById('email').value.trim(),
+            message: document.getElementById('message').value.trim()
+        };
+        
+        try {
+            const response = await fetch('send_email.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams(data)
+            });
+            
+            const result = await response.json();
+            
+            if (formMessage) {
+                formMessage.classList.remove('hidden');
+                if (result.success) {
+                    formMessage.classList.remove('text-red-600');
+                    formMessage.classList.add('text-green-600');
+                    contactForm.reset();
+                } else {
+                    formMessage.classList.remove('text-green-600');
+                    formMessage.classList.add('text-red-600');
+                }
+                formMessage.textContent = result.message;
+            }
+            
+        } catch (error) {
+            console.error('Error:', error);
+            if (formMessage) {
+                formMessage.classList.remove('hidden');
+                formMessage.classList.remove('text-green-600');
+                formMessage.classList.add('text-red-600');
+                formMessage.textContent = 'Network error. Please try again.';
+            }
+        } finally {
+            // Reset button state
+            submitButton.innerHTML = originalText;
+            submitButton.disabled = false;
+            
+            // Hide message after 5 seconds
+            if (formMessage) {
+                setTimeout(() => {
+                    formMessage.classList.add('hidden');
+                }, 5000);
+            }
+        }
+    });
+}
+
 function initializeEnhancedNavigation() {
     initializeAccurateNavigation();
 }
@@ -335,6 +405,8 @@ function initializeWebsite() {
         initI18n();
 
         initializeEnhancedNavigation();
+
+        initializeContactForm();
 
         setupMobileEnhancements();
 
