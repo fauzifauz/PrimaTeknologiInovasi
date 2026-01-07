@@ -4,7 +4,7 @@ function initializeAccurateNavigation() {
     function getAccurateScrollPosition(targetId) {
         const targetElement = document.querySelector(targetId);
         if (!targetElement) return 0;
-        
+
         const navbar = document.getElementById('navbar');
         const navbarHeight = navbar ? navbar.offsetHeight : 0;
 
@@ -12,17 +12,17 @@ function initializeAccurateNavigation() {
         const absoluteElementTop = elementRect.top + window.pageYOffset;
 
         let additionalOffset = 0;
-        
-        if (window.innerWidth < 768) { 
+
+        if (window.innerWidth < 768) {
             additionalOffset = 20;
-        } else if (window.innerWidth < 1024) { 
+        } else if (window.innerWidth < 1024) {
             additionalOffset = 30;
-        } else { 
+        } else {
             additionalOffset = 20;
         }
-        
+
         const finalOffset = absoluteElementTop - navbarHeight - additionalOffset;
-        
+
         console.log(`Scrolling to ${targetId}:`, {
             elementTop: absoluteElementTop,
             navbarHeight: navbarHeight,
@@ -30,37 +30,37 @@ function initializeAccurateNavigation() {
             finalOffset: finalOffset,
             windowWidth: window.innerWidth
         });
-        
+
         return Math.max(0, finalOffset);
     }
 
     function scrollToSectionAccurate(targetId) {
         if (!targetId || targetId === '#') return;
-        
+
         const targetElement = document.querySelector(targetId);
         if (!targetElement) {
             console.warn(`Target element not found: ${targetId}`);
             return;
         }
-        
+
         const targetPosition = getAccurateScrollPosition(targetId);
-        
+
         window.scrollTo({
             top: targetPosition,
             behavior: 'smooth'
         });
-        
+
         history.pushState(null, null, targetId);
     }
 
     function setupAccurateNavigation() {
         const desktopDropdownLinks = document.querySelectorAll('.dropdown-menu a');
         desktopDropdownLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
+            link.addEventListener('click', function (e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('href');
                 scrollToSectionAccurate(targetId);
-        
+
                 const dropdown = this.closest('.dropdown-menu');
                 if (dropdown) {
                     dropdown.classList.remove('opacity-100', 'visible');
@@ -71,7 +71,7 @@ function initializeAccurateNavigation() {
 
         const mobileDropdownLinks = document.querySelectorAll('.mobile-dropdown-content a');
         mobileDropdownLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
+            link.addEventListener('click', function (e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('href');
                 scrollToSectionAccurate(targetId);
@@ -83,11 +83,11 @@ function initializeAccurateNavigation() {
 
         const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
         navLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
+            link.addEventListener('click', function (e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('href');
                 scrollToSectionAccurate(targetId);
-                
+
                 if (window.innerWidth < 768 && window.closeMobileMenu) {
                     window.closeMobileMenu();
                 }
@@ -96,7 +96,7 @@ function initializeAccurateNavigation() {
 
         const footerLinks = document.querySelectorAll('footer a[href^="#"]');
         footerLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
+            link.addEventListener('click', function (e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('href');
                 scrollToSectionAccurate(targetId);
@@ -107,7 +107,7 @@ function initializeAccurateNavigation() {
     function setupEnhancedSectionDetection() {
         const sections = document.querySelectorAll('section[id]');
         const navLinks = document.querySelectorAll('.nav-link, .dropdown-menu a');
-        
+
         function updateActiveNavigation() {
             let currentSection = '';
             const scrollPosition = window.scrollY + 100;
@@ -133,57 +133,57 @@ function initializeAccurateNavigation() {
 
         const scrollHandler = window.utils ? window.utils.throttle(updateActiveNavigation, 100) : updateActiveNavigation;
         window.addEventListener('scroll', scrollHandler);
-        updateActiveNavigation(); 
+        updateActiveNavigation();
     }
 
     setupAccurateNavigation();
     setupEnhancedSectionDetection();
-    
+
     console.log('Accurate navigation initialized');
 }
 
 function initializeLogoSplash() {
     const logoSplash = document.getElementById('logo-splash');
-    
+
     if (!logoSplash) return;
-    
+
     const minDisplayTime = 2000;
     const startTime = Date.now();
-    
+
     function hideSplash() {
         const elapsedTime = Date.now() - startTime;
         const remainingTime = Math.max(0, minDisplayTime - elapsedTime);
-        
+
         setTimeout(() => {
             logoSplash.classList.add('hidden');
-            
+
             setTimeout(() => {
                 if (logoSplash.parentNode) {
                     logoSplash.parentNode.removeChild(logoSplash);
                 }
             }, 1000);
-            
+
         }, remainingTime);
     }
-    
+
     if (document.readyState === 'complete') {
         hideSplash();
     } else {
         window.addEventListener('load', hideSplash);
     }
-    
+
     logoSplash.addEventListener('click', hideSplash);
     setTimeout(hideSplash, 5000);
 }
 
 function initializeMobileDropdown() {
     console.log('Initializing mobile dropdown...');
-    
+
     const mobileMenuButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
- 
+
     if (mobileMenuButton && mobileMenu) {
-        mobileMenuButton.addEventListener('click', function(e) {
+        mobileMenuButton.addEventListener('click', function (e) {
             e.stopPropagation();
             const isActive = mobileMenu.classList.toggle('active');
             console.log('Mobile menu toggled:', isActive);
@@ -203,16 +203,16 @@ function initializeMobileDropdown() {
 
     const dropdownToggles = document.querySelectorAll('.mobile-dropdown-toggle');
     console.log('Found dropdown toggles:', dropdownToggles.length);
-    
+
     dropdownToggles.forEach(toggle => {
-        toggle.addEventListener('click', function(e) {
+        toggle.addEventListener('click', function (e) {
             e.preventDefault();
             e.stopPropagation();
-            
+
             const content = this.nextElementSibling;
             const isActive = content.classList.contains('active');
             const icon = this.querySelector('.dropdown-icon');
-            
+
             console.log('Dropdown clicked, current state:', isActive);
 
             document.querySelectorAll('.mobile-dropdown-content').forEach(item => {
@@ -220,14 +220,14 @@ function initializeMobileDropdown() {
                     item.classList.remove('active');
                 }
             });
-  
+
             document.querySelectorAll('.mobile-dropdown-toggle .dropdown-icon').forEach(item => {
                 if (item !== icon) {
                     item.textContent = '+';
                     item.classList.remove('rotate-45');
                 }
             });
- 
+
             if (isActive) {
                 content.classList.remove('active');
                 if (icon) {
@@ -243,8 +243,8 @@ function initializeMobileDropdown() {
             }
         });
     });
- 
-    document.addEventListener('click', function(e) {
+
+    document.addEventListener('click', function (e) {
         if (!e.target.closest('.mobile-dropdown') && !e.target.closest('#mobile-menu-button')) {
             closeAllMobileDropdowns();
 
@@ -258,7 +258,7 @@ function initializeMobileDropdown() {
             }
         }
     });
-    
+
     function closeAllMobileDropdowns() {
         document.querySelectorAll('.mobile-dropdown-content').forEach(item => {
             item.classList.remove('active');
@@ -268,8 +268,8 @@ function initializeMobileDropdown() {
             icon.classList.remove('rotate-45');
         });
     }
- 
-    window.closeMobileMenu = function() {
+
+    window.closeMobileMenu = function () {
         if (mobileMenu) {
             mobileMenu.classList.remove('active');
             closeAllMobileDropdowns();
@@ -286,17 +286,17 @@ function initializeContactForm() {
     const contactForm = document.getElementById('contact-form');
     if (!contactForm) return;
 
-    contactForm.addEventListener('submit', async function(e) {
+    contactForm.addEventListener('submit', async function (e) {
         e.preventDefault();
-        
+
         const submitButton = this.querySelector('button[type="submit"]');
         const originalText = submitButton.innerHTML;
         const formMessage = document.getElementById('form-message');
-        
+
         // Show loading state
         submitButton.innerHTML = 'Sending...';
         submitButton.disabled = true;
-        
+
         // Get form data
         const formData = new FormData(this);
         const data = {
@@ -304,7 +304,7 @@ function initializeContactForm() {
             email: document.getElementById('email').value.trim(),
             message: document.getElementById('message').value.trim()
         };
-        
+
         try {
             const response = await fetch('send_email.php', {
                 method: 'POST',
@@ -313,9 +313,9 @@ function initializeContactForm() {
                 },
                 body: new URLSearchParams(data)
             });
-            
+
             const result = await response.json();
-            
+
             if (formMessage) {
                 formMessage.classList.remove('hidden');
                 if (result.success) {
@@ -328,7 +328,7 @@ function initializeContactForm() {
                 }
                 formMessage.textContent = result.message;
             }
-            
+
         } catch (error) {
             console.error('Error:', error);
             if (formMessage) {
@@ -341,7 +341,7 @@ function initializeContactForm() {
             // Reset button state
             submitButton.innerHTML = originalText;
             submitButton.disabled = false;
-            
+
             // Hide message after 5 seconds
             if (formMessage) {
                 setTimeout(() => {
@@ -358,7 +358,7 @@ function initializeEnhancedNavigation() {
 
 function setupMobileEnhancements() {
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    
+
     if (isMobile) {
         document.body.classList.add('is-mobile');
 
@@ -379,23 +379,23 @@ function setupMobileEnhancements() {
 
 function initializeWebsite() {
     initializeLogoSplash();
-  
+
     setTimeout(() => {
         if (window.AOS) {
-            AOS.init({ 
-                duration: 900, 
-                once: true, 
+            AOS.init({
+                duration: 900,
+                once: true,
                 easing: 'ease-in-out',
                 offset: 100
             });
         }
 
-        try { 
+        try {
             if (window.lucide) {
                 lucide.createIcons();
                 setTimeout(() => lucide.createIcons(), 1000);
             }
-        } catch (err) { 
+        } catch (err) {
             console.warn('Lucide icons not available:', err);
         }
 
@@ -430,24 +430,24 @@ function initializeWebsite() {
                 const ty = py * 10;
                 heroContent.style.transform = `translate3d(${tx}px, ${-ty}px, 0) scale(1)`;
             });
-            hero.addEventListener('mouseleave', () => { 
+            hero.addEventListener('mouseleave', () => {
                 heroContent.style.transform = '';
             });
         }
 
         const logoCarousel = document.querySelector('.logo-carousel');
         if (logoCarousel) {
-            logoCarousel.addEventListener('mouseenter', () => { 
-                logoCarousel.style.animationPlayState = 'paused'; 
+            logoCarousel.addEventListener('mouseenter', () => {
+                logoCarousel.style.animationPlayState = 'paused';
             });
-            logoCarousel.addEventListener('mouseleave', () => { 
-                logoCarousel.style.animationPlayState = 'running'; 
+            logoCarousel.addEventListener('mouseleave', () => {
+                logoCarousel.style.animationPlayState = 'running';
             });
         }
 
         const contactForm = document.getElementById('contact-form');
         if (contactForm) {
-            contactForm.addEventListener('submit', function(e) {
+            contactForm.addEventListener('submit', function (e) {
                 e.preventDefault();
                 const name = document.getElementById('name').value.trim();
                 const email = document.getElementById('email').value.trim();
@@ -492,13 +492,13 @@ function initializeWebsite() {
         }
 
         createParticles();
- 
+
         optimizeBackgroundImage();
- 
+
         lazyLoadImages();
-  
+
         addScrollProgress();
-    
+
         setTimeout(() => {
             if (document.getElementById('map')) {
                 try {
@@ -526,31 +526,31 @@ function initializeWebsite() {
 function createParticles() {
     const container = document.getElementById('particles');
     if (!container) return;
-    
+
     const particleCount = 20;
     for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('div');
         particle.classList.add('particle');
-        
+
         // Random properties
         const size = Math.random() * 20 + 5;
         const left = Math.random() * 100;
         const animationDuration = Math.random() * 20 + 10;
         const animationDelay = Math.random() * 5;
-        
+
         particle.style.width = `${size}px`;
         particle.style.height = `${size}px`;
         particle.style.left = `${left}%`;
         particle.style.animationDuration = `${animationDuration}s`;
         particle.style.animationDelay = `${animationDelay}s`;
-        
+
         container.appendChild(particle);
     }
 }
 
 function initMap() {
     const jakartaCoords = [-6.2088, 106.8456];
-    
+
     const map = L.map('map').setView(jakartaCoords, 12);
 
     const osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -599,7 +599,7 @@ function initMap() {
     `).openPopup();
 
     const controls = L.control({ position: 'topright' });
-    controls.onAdd = function() {
+    controls.onAdd = function () {
         const div = L.DomUtil.create('div', 'map-controls');
         div.innerHTML = `
             <button class="map-btn" onclick="map.setView([-6.2088, 106.8456], 12)" title="Reset View">
@@ -613,7 +613,7 @@ function initMap() {
     };
     controls.addTo(map);
 
-    map.on('locationfound', function(e) {
+    map.on('locationfound', function (e) {
         L.marker(e.latlng).addTo(map)
             .bindPopup("You are here!").openPopup();
     });
@@ -627,11 +627,11 @@ function optimizeBackgroundImage() {
 
     const bgImage = new Image();
     bgImage.src = 'assets/background/backgroundcompany.jpg';
-    
-    bgImage.onload = function() {
+
+    bgImage.onload = function () {
         console.log('Background image loaded successfully');
         heroSection.classList.add('bg-loaded');
-    
+
         const bgContainer = heroSection.querySelector('.bg-cover');
         if (bgContainer) {
             bgContainer.style.opacity = '0';
@@ -641,10 +641,10 @@ function optimizeBackgroundImage() {
             }, 100);
         }
     };
-    
-    bgImage.onerror = function() {
+
+    bgImage.onerror = function () {
         console.error('Failed to load background image');
-  
+
         heroSection.style.background = 'linear-gradient(135deg, #0a2463 0%, #1e40af 100%)';
 
         console.warn('Background image not found. Using gradient fallback.');
@@ -653,7 +653,7 @@ function optimizeBackgroundImage() {
 
 function lazyLoadImages() {
     const lazyImages = document.querySelectorAll('img[data-src]');
-    
+
     const imageObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -672,22 +672,22 @@ function enhancedSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            
+
             const targetId = this.getAttribute('href');
             if (targetId === '#') return;
-            
+
             const targetElement = document.querySelector(targetId);
             if (!targetElement) return;
-            
+
             const navbar = document.getElementById('navbar');
             const navbarHeight = navbar ? navbar.offsetHeight : 0;
             const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight - 20;
-            
+
             window.scrollTo({
                 top: targetPosition,
                 behavior: 'smooth'
             });
-     
+
             if (window.innerWidth < 768 && window.closeMobileMenu) {
                 window.closeMobileMenu();
             }
@@ -699,19 +699,19 @@ function addScrollProgress() {
     const progressBar = document.createElement('div');
     progressBar.className = 'scroll-progress fixed top-0 left-0 w-0 h-1 bg-primary-600 z-50 transition-all duration-300';
     document.body.appendChild(progressBar);
-    
+
     window.addEventListener('scroll', () => {
         const winHeight = window.innerHeight;
         const docHeight = document.documentElement.scrollHeight;
         const scrollTop = window.pageYOffset;
         const scrollPercent = (scrollTop / (docHeight - winHeight)) * 100;
-        
+
         progressBar.style.width = `${scrollPercent}%`;
     });
 }
 
 function handleImageErrors() {
-    document.addEventListener('error', function(e) {
+    document.addEventListener('error', function (e) {
         if (e.target.tagName === 'IMG') {
             console.warn('Image failed to load:', e.target.src);
             e.target.style.opacity = '0.5';
@@ -727,43 +727,43 @@ function handleResponsiveImages() {
             img.loading = 'lazy';
         }
 
-        img.addEventListener('error', function() {
+        img.addEventListener('error', function () {
             this.style.opacity = '0.3';
             this.alt = 'Image failed to load';
         });
     });
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     console.log('DOM loaded, initializing website...');
 
     initializeMobileDropdown();
-   
+
     initializeWebsite();
 
     if (typeof initI18n === 'function') initI18n();
-  
+
     const yearEl = document.getElementById('current-year');
     if (yearEl) yearEl.textContent = new Date().getFullYear();
 
     handleImageErrors();
     handleResponsiveImages();
-    
+
     registerCustomClickHandlers();
-    
+
     console.log('Website initialization complete');
 });
 
 function testNavigation() {
     console.log('Testing navigation targets...');
-    
+
     const testTargets = [
         '#about-profile', '#brand-promise', '#vision-mission', '#our-goals',
         '#it-infrastructure', '#iot-solutions', '#smart-building', '#managed-services',
-        '#company-overview', '#business-plan', '#marketing-strategy', '#management-team',
+        '#company-overview', '#business-plan', '#marketing-strategy', '#organization_structure',
         '#certified-professionals', '#business-partners'
     ];
-    
+
     testTargets.forEach(target => {
         const element = document.querySelector(target);
         if (element) {
@@ -780,7 +780,7 @@ window.enhancedSmoothScroll = enhancedSmoothScroll;
 window.testNavigation = testNavigation;
 
 window.utils = {
-    debounce: function(func, wait) {
+    debounce: function (func, wait) {
         let timeout;
         return function executedFunction(...args) {
             const later = () => {
@@ -791,10 +791,10 @@ window.utils = {
             timeout = setTimeout(later, wait);
         };
     },
-    
-    throttle: function(func, limit) {
+
+    throttle: function (func, limit) {
         let inThrottle;
-        return function() {
+        return function () {
             const args = arguments;
             const context = this;
             if (!inThrottle) {
@@ -806,17 +806,17 @@ window.utils = {
     }
 };
 
-window.addEventListener('error', function(e) {
+window.addEventListener('error', function (e) {
     console.error('Global error:', e.error);
 });
 
 if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function() {
+    window.addEventListener('load', function () {
         navigator.serviceWorker.register('/sw.js')
-            .then(function(registration) {
+            .then(function (registration) {
                 console.log('SW registered: ', registration);
             })
-            .catch(function(registrationError) {
+            .catch(function (registrationError) {
                 console.log('SW registration failed: ', registrationError);
             });
     });
@@ -872,7 +872,7 @@ function registerCustomClickHandlers() {
     mappings.forEach(m => {
         const el = document.getElementById(m.id);
         if (!el) return;
-        el.addEventListener('click', function(e) {
+        el.addEventListener('click', function (e) {
             e.preventDefault();
             el.classList.add('click-pulse');
             setTimeout(() => el.classList.remove('click-pulse'), 520);
@@ -890,7 +890,7 @@ function registerBusinessPlanLink() {
         const trigger = document.querySelector('a.scroll-link[href="#business-plan"]');
         if (!trigger) return;
 
-        trigger.addEventListener('click', function(e) {
+        trigger.addEventListener('click', function (e) {
             e.preventDefault();
             e.stopPropagation();
 
@@ -903,7 +903,7 @@ function registerBusinessPlanLink() {
 
             const target = document.querySelector('#business-plan');
             if (target) {
-  
+
                 target.classList.remove('section-focus');
                 setTimeout(() => {
                     target.classList.add('section-focus');
@@ -934,7 +934,7 @@ const translations = {
         "nav_company_overview": "Gambaran Perusahaan",
         "nav_business_plan": "Rencana Bisnis",
         "nav_marketing_strategy": "Strategi Pemasaran",
-        "nav_management_team": "Tim Manajemen",
+        "nav_organization_structure": "Struktur Organisasi",
         "nav_certified_professionals": "Profesional Bersertifikat",
         "nav_business_partners": "Mitra Bisnis",
 
@@ -961,7 +961,7 @@ const translations = {
         "brand_modernization_desc": "Tetap terdepan dengan mengadopsi teknologi dan perbaikan berkelanjutan yang inovatif dan efektif.",
         "brand_agility": "Agility",
         "brand_agility_desc": "Beradaptasi terhadap perubahan dan mendorong kemajuan melalui solusi fleksibel dan efektif.",
-        
+
         "vision_title": "Visi Kami",
         "vision_quote": '"Menjadi mitra teknologi terkemuka yang mendorong pertumbuhan bisnis berkelanjutan melalui inovasi, integrasi, dan transformasi digital dalam Solusi IoT dan TI."',
         "vision_point1_title": "Membangun Keunggulan Digital",
@@ -970,7 +970,7 @@ const translations = {
         "vision_point2_desc": "Kami berusaha untuk mendorong ekosistem teknologi yang terhubung dan berkelanjutan yang mendukung inovasi dan kemajuan digital di berbagai industri.",
         "vision_point3_title": "Menginspirasi Keberlanjutan Digital",
         "vision_point3_desc": "Kami mendorong organisasi untuk mengadopsi transformasi digital yang cerdas, efisien, dan berkelanjutan untuk pertumbuhan jangka panjang.",
-        
+
         "mission_title": "Misi Kami",
         "mission_quote": '"Menghadirkan solusi teknologi yang inovatif, terintegrasi, dan bernilai yang membantu klien mencapai efisiensi, keamanan, dan pertumbuhan berkelanjutan untuk kesuksesan jangka panjang."',
         "mission_point1_title": "Mendorong Transformasi Digital",
@@ -979,7 +979,7 @@ const translations = {
         "mission_point2_desc": "Kami membangun budaya pembelajaran dan kerja sama tim, memungkinkan individu dan organisasi untuk tumbuh dan mencapai keunggulan bersama.",
         "mission_point3_title": "Menghadirkan Keunggulan",
         "mission_point3_desc": "Kami mempertahankan standar global kualitas dan keamanan, memberikan solusi terpercaya melalui operasi yang transparan.",
-        
+
         "goals_title": "Tujuan Kami",
         "goal1_title": "Menghadirkan Solusi Berdampak Tinggi",
         "goal1_desc": "Menyediakan solusi teknologi yang inovatif dan berorientasi hasil yang menciptakan nilai terukur bagi klien.",
@@ -999,7 +999,7 @@ const translations = {
         "iot_point1": "Pemantauan real-time, pemeliharaan prediktif",
         "iot_point2": "Keamanan, wawasan berbasis data, keunggulan kompetitif.",
 
-         "services_title": "Layanan & Solusi",
+        "services_title": "Layanan & Solusi",
         "it_infrastructure_title": "Infrastruktur TI & Solusi",
         "it_intro": "Produk TI yang kami hadirkan bukan sekadar teknologi, tetapi solusi yang menjawab kebutuhan bisnis pelanggan secara komprehensif.",
         "it_point1": "Efisiensi, keamanan, keandalan",
@@ -1014,27 +1014,27 @@ const translations = {
         "server_storage_desc1": "Menyediakan solusi server fisik dan virtual untuk pemrosesan data.",
         "server_storage_desc2": "Produk termasuk server rack, blade server, dan sistem penyimpanan NAS/SAN.",
         "server_storage_desc3": "Memastikan ketersediaan data, performa tinggi, dan keamanan penyimpanan.",
-        
+
         "network_infrastructure_title": "Infrastruktur Jaringan",
         "network_infrastructure_desc1": "Membangun jaringan komunikasi data yang andal & aman.",
         "network_infrastructure_desc2": "Produk termasuk switch, router kecepatan tinggi, firewall, dan access point.",
         "network_infrastructure_desc3": "Instalasi LAN dan fiber optic dengan manajemen topologi yang efisien.",
-        
+
         "data_center_title": "Data Center Solution",
         "data_center_desc1": "Solusi lengkap untuk membangun server room atau data center.",
         "data_center_desc2": "Produk termasuk sistem power, cooling, rack system, UPS, dan monitoring.",
         "data_center_desc3": "Fokus pada efisiensi energi, keamanan, dan kelangsungan operasional.",
-        
+
         "enterprise_network_title": "Enterprise Network Solution",
         "enterprise_network_desc1": "Manfaat SD-WAN untuk meningkatkan performa jaringan dan efisiensi biaya.",
         "enterprise_network_desc2": "Solusi komprehensif termasuk SD-WAN, wireless enterprise-grade, dan NAC.",
         "enterprise_network_desc3": "Fokus pada peningkatan efisiensi operasional dan penguatan keamanan jaringan.",
-        
+
         "seat_management_title": "Seat Management Solutions",
         "seat_management_desc1": "Mengelola perangkat pengguna (laptop, PC, printer, dll.) dari instalasi hingga maintenance.",
         "seat_management_desc2": "Monitoring dan maintenance proaktif untuk keandalan dan performa sistem.",
         "seat_management_desc3": "Memastikan skalabilitas mulus dan keamanan akses jaringan yang komprehensif di seluruh sistem.",
-        
+
         "software_solutions_title": "Software Solutions",
         "software_solutions_desc1": "Membantu organisasi mendapatkan lisensi software resmi dan compliant.",
         "software_solutions_desc2": "Mendukung vendor global terkemuka (Microsoft, Adobe, Cisco, dll.).",
@@ -1043,7 +1043,7 @@ const translations = {
         "iot_solutions_title": "Solusi IoT",
         "iot_solutions_desc": "Solusi Internet of Things komprehensif yang menghubungkan perangkat, mengumpulkan data, dan memberikan wawasan yang dapat ditindaklanjuti untuk pengambilan keputusan yang lebih cerdas.",
         "iot_connectivity_title": "Konektivitas IoT",
-        "iot_connectivity_desc": "Solusi konektivitas mulus untuk perangkat IoT dengan infrastruktur jaringan yang andal.",
+        "iot_connectivity_desc": "Solusi konektivitas mulus untuk perangkat IoT dengan infrastruktur jaringan yangandal.",
         "iot_analytics_title": "Analisis Data",
         "iot_analytics_desc": "Platform analisis canggih untuk memproses dan mendapatkan wawasan dari data IoT.",
         "iot_security_title": "Keamanan IoT",
@@ -1084,7 +1084,7 @@ const translations = {
         "company_overview_title": "Gambaran Perusahaan",
         "company_overview_desc": "PRIMA TEKNOLOGI INOVASI adalah perusahaan teknologi yang berpikiran maju yang berdedikasi untuk menyediakan solusi TI inovatif dan terintegrasi yang memberdayakan bisnis untuk berkembang di era digital. Didorong oleh pertumbuhan konsisten klien, proyek, dan kehadiran pasar, kami terus memperluas keahlian di berbagai industri. Didukung oleh tim profesional dan mitra strategis, kami berkomitmen untuk menyediakan solusi bernilai, menjalin kolaborasi jangka panjang, dan mencapai pertumbuhan bisnis yang berkelanjutan melalui keunggulan teknologi.",
         "our_business_plan": "Rencana Bisnis Kami",
-        
+
         "business_plan_title": "Rencana Bisnis",
         "business_plan1_title": "Inovasi Produk",
         "business_plan1_desc": "Terus berinvestasi dalam R&D untuk menghadirkan produk digital yang inovatif, terintegrasi, dan siap masa depan.",
@@ -1094,7 +1094,7 @@ const translations = {
         "business_plan3_desc": "Membangun aliansi dengan penyedia teknologi dan mitra bisnis untuk meningkatkan kemampuan layanan.",
         "business_plan4_title": "Pertumbuhan Berkelanjutan",
         "business_plan4_desc": "Fokus pada profitabilitas jangka panjang dengan menyeimbangkan kinerja dengan inovasi dan efisiensi.",
-        
+
         "marketing_strategy_title": "Strategi Pemasaran",
         "marketing_strategy1_title": "Poin Strategis",
         "marketing_strategy1_desc": "Memposisikan PRIMA TEKNOLOGI INOVASU sebagai mitra teknologi yang andal dan inovatif melalui solusi bernilai.",
@@ -1104,8 +1104,8 @@ const translations = {
         "marketing_strategy3_desc": "Menghadirkan solusi yang disesuaikan dengan komunikasi transparan dan dukungan responsif.",
         "marketing_strategy4_title": "Kemitraan Strategis Terpadu",
         "marketing_strategy4_desc": "Memperluas jangkauan pasar melalui aliansi dengan pemimpin industri untuk solusi komprehensif.",
-        
-        "management_team_title": "Tim Manajemen",
+
+        "organization_structure_title": "Struktur Organisasi",
         "certified_professionals_title": "Profesional Bersertifikat",
         "business_partners_title": "Mitra Bisnis Resmi",
 
@@ -1114,7 +1114,7 @@ const translations = {
         "testimonial1_name": "John Doe",
         "testimonial1_position": "CTO, Tech Solutions Inc.",
         "testimonial2_text": "\"Solusi IoT yang diimplementasikan oleh PRIMA telah meningkatkan efisiensi operasional kami secara signifikan. Keahlian mereka benar-benar luar biasa.\"",
-        "testimonial2_name": "Anna Smith", 
+        "testimonial2_name": "Anna Smith",
         "testimonial2_position": "Direktur Operasi, Smart Industries",
         "testimonial3_text": "\"Bekerja dengan PRIMA adalah perubahan besar dalam perjalanan transformasi digital kami. Tim mereka berpengetahuan, responsif, dan berorientasi hasil.\"",
         "testimonial3_name": "Michael Johnson",
@@ -1123,7 +1123,7 @@ const translations = {
         "contact_title": "Mari Bekerja Sama",
         "contact_subtitle": "Kami siap menjadi mitra terpercaya Anda dalam membangun solusi yang lebih cerdas dan terhubung.",
         "contact_address": "Daerah Khusus Ibu Kota Jakarta",
-        "our_location": "Lokasi Kami", 
+        "our_location": "Lokasi Kami",
         "location_city": "Jakarta, Indonesia",
         "open_google_maps": "Buka di Google Maps",
         "get_directions": "Dapatkan Petunjuk Arah",
@@ -1131,7 +1131,7 @@ const translations = {
         "contact_name": "Nama Lengkap",
         "contact_name_placeholder": "John Doe",
         "contact_email": "Email Aktif",
-        "contact_email_placeholder": "email@perusahaan.com", 
+        "contact_email_placeholder": "email@perusahaan.com",
         "contact_message": "Pesan / Pertanyaan Bisnis",
         "contact_message_placeholder": "Saya tertarik dengan solusi Layanan Terkelola Anda...",
         "send_message": "Kirim Pesan",
@@ -1141,7 +1141,7 @@ const translations = {
         "telephone": "Telepon",
 
         "footer_description": "Menginovasi masa depan melalui solusi teknologi mutakhir.",
-        "quick_links": "Tautan Cepat", 
+        "quick_links": "Tautan Cepat",
         "footer_services": "Layanan",
         "connect_with_us": "Terhubung dengan Kami",
         "all_rights_reserved": "All rights reserved."
@@ -1163,7 +1163,7 @@ const translations = {
         "nav_company_overview": "Company Overview",
         "nav_business_plan": "Business Plan",
         "nav_marketing_strategy": "Marketing Strategy",
-        "nav_management_team": "Management Team",
+        "nav_organization_structure": "Organization Structure",
         "nav_certified_professionals": "Certified Professionals",
         "nav_business_partners": "Business Partners",
 
@@ -1190,7 +1190,7 @@ const translations = {
         "brand_modernization_desc": "Stay ahead by embracing technology and continuous improvement.",
         "brand_agility": "Agility",
         "brand_agility_desc": "Adapt quickly to change and drive progress through flexible, effective solutions.",
-        
+
         "vision_title": "Our Vision",
         "vision_quote": "\"To become a leading technology partner that drives sustainable business growth through innovation, integration, and digital transformation in IoT and IT Solutions.\"",
         "vision_point1_title": "Building Digital Excellence",
@@ -1199,7 +1199,7 @@ const translations = {
         "vision_point2_desc": "We strive to drive a connected and sustainable technology ecosystem that supports innovation and digital advancement across industries.",
         "vision_point3_title": "Inspiring Digital Sustainability",
         "vision_point3_desc": "We encourage organizations to adopt smart, efficient, and sustainable digital transformation for long-term growth.",
-        
+
         "mission_title": "Our Mission",
         "mission_quote": "\"To deliver innovative, integrated, and value-driven technology solutions that help clients achieve efficiency, security, and sustainable growth for long-term success.\"",
         "mission_point1_title": "Driving Digital Transformation",
@@ -1208,7 +1208,7 @@ const translations = {
         "mission_point2_desc": "We build a culture of learning and teamwork, enabling individuals and organizations to grow and achieve excellence together.",
         "mission_point3_title": "Delivering Excellence",
         "mission_point3_desc": "We maintain global standards of quality and security, delivering trusted solutions through transparent and result-driven operations.",
-        
+
         "goals_title": "Our Goals",
         "goal1_title": "Deliver High Impact Solutions",
         "goal1_desc": "Provide innovative and result-oriented technology solutions that create measurable value for clients.",
@@ -1243,27 +1243,27 @@ const translations = {
         "server_storage_desc1": "Providing physical and virtual server solutions for data processing.",
         "server_storage_desc2": "Products include server racks, blade servers, and NAS/SAN storage systems.",
         "server_storage_desc3": "Ensure data availability, high performance, and storage security.",
-        
+
         "network_infrastructure_title": "Network Infrastructure",
         "network_infrastructure_desc1": "Building reliable & secure data communication networks.",
         "network_infrastructure_desc2": "Products include switches, high-speed routers, firewalls, and access points.",
         "network_infrastructure_desc3": "LAN and fiber optic installations with efficient topology management.",
-        
+
         "data_center_title": "Data Center Solution",
         "data_center_desc1": "Complete solutions for building server rooms or data centers.",
         "data_center_desc2": "Products include power systems, cooling, rack systems, UPS, and monitoring.",
         "data_center_desc3": "Focus on energy efficiency, safety, and operational continuity.",
-        
+
         "enterprise_network_title": "Enterprise Network Solution",
         "enterprise_network_desc1": "SD-WAN benefits for improving network performance and cost efficiency.",
         "enterprise_network_desc2": "Comprehensive solutions including SD-WAN, enterprise-grade wireless, and NAC.",
         "enterprise_network_desc3": "Focus on enhancing operational efficiency and strengthening network security.",
-        
+
         "seat_management_title": "Seat Management Solutions",
         "seat_management_desc1": "Managing user devices (laptops, PCs, printers, etc.) from installation to maintenance.",
         "seat_management_desc2": "Proactive monitoring and maintenance for system reliability and performance.",
         "seat_management_desc3": "Ensuring seamless scalability and comprehensive network access security across systems.",
-        
+
         "software_solutions_title": "Software Solutions",
         "software_solutions_desc1": "Helping organizations obtain official, compliant software licenses.",
         "software_solutions_desc2": "Supporting leading global vendors (Microsoft, Adobe, Cisco, etc.).",
@@ -1310,39 +1310,39 @@ const translations = {
         "get_managed_services": "Get Managed Services",
 
         "business_title": "Business & Capabilities",
-        "company_overview_title": "Company Overview", 
+        "company_overview_title": "Company Overview",
         "company_overview_desc": "PRIMA TEKNOLOGI INOVASI is a forward-thinking technology company dedicated to delivering innovative and integrated IT solutions that empower businesses to thrive in the digital era. Driven by consistent growth in clients, projects, and market presence, we continuously expand our expertise across diverse industries. Backed by a professional team and strategic partnerships, we are committed to providing value-driven solutions, fostering long-term collaborations, and achieving sustainable business growth through technology excellence.",
         "our_business_plan": "Our Business Plan",
-        
+
         "business_plan_title": "Business Plan",
         "business_plan1_title": "Product Innovation",
         "business_plan1_desc": "Continuously invest in R&D to deliver innovative, integrated, and future-ready digital products.",
-        "business_plan2_title": "Digital Market Expansion", 
+        "business_plan2_title": "Digital Market Expansion",
         "business_plan2_desc": "Expand services and reach new industries by offering customized and scalable technology solutions.",
         "business_plan3_title": "Tech Strategic Partnerships",
         "business_plan3_desc": "Build alliances with technology providers and business partners to enhance service capabilities.",
         "business_plan4_title": "Sustainable Growth",
         "business_plan4_desc": "Focus on long-term profitability by balancing performance with innovation and efficiency.",
-        
+
         "marketing_strategy_title": "Marketing Strategy",
         "marketing_strategy1_title": "Strategic Point",
         "marketing_strategy1_desc": "Positioning PRIMA T.I. as a reliable and innovative technology partner through value-driven solutions.",
         "marketing_strategy2_title": "Brand Awareness",
         "marketing_strategy2_desc": "Enhancing visibility through digital marketing, social engagement, and strategic networking.",
-        "marketing_strategy3_title": "Client-Centric Approach", 
+        "marketing_strategy3_title": "Client-Centric Approach",
         "marketing_strategy3_desc": "Delivering tailored solutions with transparent communication and responsive support.",
         "marketing_strategy4_title": "Strategic Partnerships",
         "marketing_strategy4_desc": "Expanding market reach through alliances with industry leaders for comprehensive solutions.",
-        
-        "management_team_title": "Management Team",
-        "certified_professionals_title": "Certified Professionals", 
+
+        "organization_structure_title": "Organization Structure",
+        "certified_professionals_title": "Certified Professionals",
         "business_partners_title": "Official Business Partners",
 
         "testimonials_title": "What Our Clients Say",
         "testimonial1_text": "\"PRIMA TEKNOLOGI INOVASI transformed our IT infrastructure with efficiency and professionalism. Their team delivered beyond our expectations.\"",
         "testimonial1_name": "John Doe",
         "testimonial1_position": "CTO, Tech Solutions Inc.",
-        "testimonial2_text": "\"The IoT solutions implemented by PRIMA have significantly improved our operational efficiency. Their expertise is truly remarkable for sure.\"", 
+        "testimonial2_text": "\"The IoT solutions implemented by PRIMA have significantly improved our operational efficiency. Their expertise is truly remarkable for sure.\"",
         "testimonial2_name": "Anna Smith",
         "testimonial2_position": "Operations Director, Smart Industries",
         "testimonial3_text": "\"Working with PRIMA was a game-changer for our digital transformation journey. Their team is knowledgeable, responsive, and results-driven.\"",
@@ -1353,7 +1353,7 @@ const translations = {
         "contact_subtitle": "We're ready to be your trusted partner in building smarter, connected solutions.",
         "contact_address": "Daerah Khusus Ibu Kota Jakarta",
         "our_location": "Our Location",
-        "location_city": "Jakarta, Indonesia", 
+        "location_city": "Jakarta, Indonesia",
         "open_google_maps": "Open in Google Maps",
         "get_directions": "Get Directions",
         "send_message_title": "Send Us a Message",
@@ -1361,7 +1361,7 @@ const translations = {
         "contact_name_placeholder": "John Doe",
         "contact_email": "Active Email",
         "contact_email_placeholder": "email@company.com",
-        "contact_message": "Message / Business Inquiry", 
+        "contact_message": "Message / Business Inquiry",
         "contact_message_placeholder": "I'm interested in your Managed Services solutions...",
         "send_message": "Send Message",
         "fast_response": "Fast Response",
@@ -1371,7 +1371,7 @@ const translations = {
 
         "footer_description": "Innovating the future through cutting-edge technology solutions.",
         "quick_links": "Quick Links",
-        "footer_services": "Services", 
+        "footer_services": "Services",
         "connect_with_us": "Connect With Us",
         "all_rights_reserved": "All rights reserved."
     }
@@ -1391,7 +1391,7 @@ function applyTranslations(lang) {
         }
     });
 
-    try { document.documentElement.lang = lang === 'id' ? 'id' : 'en'; } catch (e) {}
+    try { document.documentElement.lang = lang === 'id' ? 'id' : 'en'; } catch (e) { }
     const btnId = document.getElementById('lang-id');
     const btnEn = document.getElementById('lang-en');
     if (btnId && btnEn) {
@@ -1402,7 +1402,7 @@ function applyTranslations(lang) {
         }
     }
 
-    try { localStorage.setItem('site_lang', lang); } catch (e) {}
+    try { localStorage.setItem('site_lang', lang); } catch (e) { }
 }
 
 function initI18n() {
